@@ -246,6 +246,21 @@ html { scroll-behavior: smooth; }
 {{BODY}}
   <p class="foot">Resumen personal de estudio hecho a partir del material de la asignatura Gestión en Salud (UNIR). No incluye ni sustituye el material original del curso. <a href="guia-gestion-salud.pdf">PDF para imprimir</a> · <a href="quiz.html">Quiz</a></p>
 </main>
+<script>
+// Al abrir la guía con #tema-N, salta a ese tema aunque las fuentes tarden en cargar
+(function () {
+  function irAlHash() {
+    var id = decodeURIComponent(location.hash.slice(1));
+    var el = id && document.getElementById(id);
+    if (el) el.scrollIntoView({ block: "start", behavior: "instant" });
+  }
+  if (location.hash) {
+    irAlHash();
+    window.addEventListener("load", irAlHash);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(irAlHash);
+  }
+})();
+</script>
 </body>
 </html>
 """.replace("{{CHIPS}}", "".join(chips)).replace("{{BODY}}", body)
