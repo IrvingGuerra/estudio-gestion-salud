@@ -1,0 +1,705 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#2e4ca8">
+<title>Quiz de Gestión en Salud</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Una sola columna de ~720px: cabecera con marcador, filtros y la pregunta como única tarjeta; al final, la ficha del indicador */
+:root {
+  --bg: #f2f5f7;
+  --surface: #ffffff;
+  --ink: #16212a;
+  --muted: #586874;
+  --line: #d4dce2;
+  --accent: #2e4ca8;
+  --accent-soft: #e2e8f7;
+  --on-accent: #ffffff;
+  --good: #1d7445;
+  --good-soft: #def0e5;
+  --bad: #b1372f;
+  --bad-soft: #f7e1df;
+  --label-bg: #eaf0f6;
+  --font-display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --radius: 10px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f151a;
+    --surface: #172029;
+    --ink: #e4ebf0;
+    --muted: #98a9b5;
+    --line: #2a3742;
+    --accent: #8ea7f3;
+    --accent-soft: #1e2946;
+    --on-accent: #0c1430;
+    --good: #5ec88c;
+    --good-soft: #13301f;
+    --bad: #f1897f;
+    --bad-soft: #3a1b19;
+    --label-bg: #1d2832;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f151a;
+  --surface: #172029;
+  --ink: #e4ebf0;
+  --muted: #98a9b5;
+  --line: #2a3742;
+  --accent: #8ea7f3;
+  --accent-soft: #1e2946;
+  --on-accent: #0c1430;
+  --good: #5ec88c;
+  --good-soft: #13301f;
+  --bad: #f1897f;
+  --bad-soft: #3a1b19;
+  --label-bg: #1d2832;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.55;
+}
+.wrap {
+  max-width: 46rem;
+  margin: 0 auto;
+  padding-inline: 16px;
+  padding-block: 28px 56px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 20px;
+}
+h1, h2 {
+  font-family: var(--font-display);
+  text-wrap: balance;
+  margin: 0;
+  line-height: 1.15;
+}
+h1 { font-size: clamp(1.6rem, 4.5vw, 2.15rem); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: 1.35rem; font-weight: 700; }
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 6px;
+}
+.lede { margin: 8px 0 0; color: var(--muted); max-width: 60ch; }
+.toplinks { display: flex; gap: 16px; margin: 0 0 14px; font-size: 0.95rem; }
+a { color: var(--accent); text-underline-offset: 3px; }
+@media (hover: none) { .hint, .kbd-tip { display: none; } }
+
+/* Controles */
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 16px;
+  align-items: end;
+}
+.field { display: grid; gap: 6px; min-width: 0; }
+.field-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.seg {
+  display: inline-flex;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--surface);
+}
+.seg button {
+  font: inherit;
+  font-size: 0.95rem;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  padding: 8px 12px;
+  cursor: pointer;
+  border-right: 1px solid var(--line);
+}
+.seg button:last-child { border-right: 0; }
+.seg button[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); }
+select {
+  width: 100%;
+  font: inherit;
+  font-size: 0.95rem;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 8px 10px;
+  max-width: 100%;
+}
+.check {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+  padding-block: 8px;
+  cursor: pointer;
+}
+.check input { width: 18px; height: 18px; accent-color: var(--accent); }
+
+/* Marcador */
+.meter { display: grid; gap: 8px; }
+.meter-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.95rem;
+}
+.tally { display: flex; gap: 14px; }
+.tally .ok { color: var(--good); font-weight: 700; }
+.tally .ko { color: var(--bad); font-weight: 700; }
+.bar {
+  height: 6px;
+  border-radius: 99px;
+  background: var(--line);
+  overflow: hidden;
+}
+.bar > span { display: block; height: 100%; background: var(--accent); transition: width 0.25s ease; }
+
+/* Tarjeta de pregunta */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: clamp(18px, 4vw, 28px);
+  display: grid;
+  gap: 18px;
+  min-width: 0;
+}
+.qhead { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; }
+.tag {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.03em;
+  background: var(--accent-soft);
+  color: var(--ink);
+  border-radius: 6px;
+  padding: 3px 8px;
+}
+.qnum { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); }
+.qtext { font-size: 1.2rem; font-weight: 700; margin: 0; line-height: 1.4; }
+.opts { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.opt {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 2rem 1fr auto;
+  gap: 12px;
+  align-items: center;
+  text-align: left;
+  font: inherit;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  border-radius: 8px;
+  padding: 11px 14px;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+.opt:hover:not(:disabled) { border-color: var(--accent); }
+.opt:focus-visible, .btn:focus-visible, .seg button:focus-visible, select:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+.opt:disabled { cursor: default; }
+.letter {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 6px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  font-size: 0.9rem;
+}
+.opt-text { min-width: 0; }
+.verdict { font-family: var(--font-mono); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
+.opt.is-right { border-color: var(--good); background: var(--good-soft); }
+.opt.is-right .letter { background: var(--good); border-color: var(--good); color: var(--surface); }
+.opt.is-right .verdict { color: var(--good); }
+.opt.is-wrong { border-color: var(--bad); background: var(--bad-soft); }
+.opt.is-wrong .letter { background: var(--bad); border-color: var(--bad); color: var(--surface); }
+.opt.is-wrong .verdict { color: var(--bad); }
+.opt.is-dim { opacity: 0.6; }
+
+.why {
+  border-left: 4px solid var(--good);
+  background: var(--good-soft);
+  border-radius: 0 8px 8px 0;
+  padding: 12px 16px;
+  display: grid;
+  gap: 4px;
+}
+.why.miss { border-left-color: var(--bad); background: var(--bad-soft); }
+.why-title { font-weight: 700; margin: 0; }
+.why p { margin: 0; }
+.why .ref { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); }
+
+.actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; }
+.hint { font-size: 0.85rem; color: var(--muted); }
+.btn {
+  font: inherit;
+  font-weight: 700;
+  border-radius: 8px;
+  padding: 10px 18px;
+  cursor: pointer;
+  border: 1.5px solid var(--accent);
+  background: var(--accent);
+  color: var(--on-accent);
+}
+.btn.ghost { background: transparent; color: var(--accent); }
+.btn:disabled { opacity: 0.45; cursor: default; }
+
+/* Ficha del indicador */
+.ficha { width: 100%; border-collapse: collapse; font-size: 0.98rem; }
+.ficha th, .ficha td { border: 1px solid var(--line); padding: 10px 12px; text-align: left; vertical-align: top; }
+.ficha th { width: 38%; background: var(--label-bg); font-weight: 700; }
+.ficha td { font-variant-numeric: tabular-nums; }
+.table-scroll { overflow-x: auto; }
+.big { font-family: var(--font-display); font-size: 2rem; font-weight: 700; line-height: 1; }
+.pill {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-radius: 99px;
+  padding: 3px 10px;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+.pill.ok { background: var(--good-soft); color: var(--good); }
+.pill.ko { background: var(--bad-soft); color: var(--bad); }
+
+.temas { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.tema-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 5.5rem 3.2rem;
+  gap: 12px;
+  align-items: center;
+  font-size: 0.95rem;
+}
+.tema-row .name { min-width: 0; }
+.tema-row .mini { height: 8px; border-radius: 99px; background: var(--bad-soft); overflow: hidden; }
+.tema-row .mini > span { display: block; height: 100%; background: var(--good); }
+.tema-row .count { font-variant-numeric: tabular-nums; text-align: right; font-family: var(--font-mono); font-size: 0.85rem; }
+.note { font-size: 0.9rem; color: var(--muted); margin: 0; }
+
+@media (max-width: 520px) {
+  .seg button { padding: 8px 10px; }
+  .qtext { font-size: 1.1rem; }
+  .tema-row { grid-template-columns: minmax(0, 1fr) 3.5rem 3rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
+</style>
+</head>
+<body>
+
+<main class="wrap">
+  <header>
+    <nav class="toplinks" aria-label="Navegación"><a href="index.html">← Inicio</a><a href="guia.html">Ver la guía</a></nav>
+    <p class="eyebrow">Maestría en Dirección y Administración en Salud · UNIR</p>
+    <h1>Quiz de Gestión en Salud</h1>
+    <p class="lede">Las 43 preguntas de tu guía de estudio. Elige una respuesta y te digo al momento si acertaste y por qué. <span class="kbd-tip">Puedes contestar con las teclas A–D y pasar a la siguiente con Enter.</span></p>
+  </header>
+
+  <section class="controls" aria-label="Opciones del quiz">
+    <div class="field">
+      <span class="field-label" id="mode-label">Orden</span>
+      <div class="seg" role="group" aria-labelledby="mode-label">
+        <button type="button" id="mode-orden" data-mode="orden" aria-pressed="true">En orden</button>
+        <button type="button" id="mode-azar" data-mode="azar" aria-pressed="false">Al azar</button>
+        <button type="button" id="mode-falladas" data-mode="falladas" aria-pressed="false">Mis falladas (<span id="failed-count">0</span>)</button>
+      </div>
+    </div>
+    <div class="field">
+      <label class="field-label" for="tema">Tema</label>
+      <select id="tema"></select>
+    </div>
+    <label class="check" for="mezclar"><input type="checkbox" id="mezclar" checked> Mezclar las respuestas</label>
+  </section>
+
+  <section class="meter" aria-label="Avance">
+    <div class="meter-row">
+      <span id="progress-text">Pregunta 1 de 43</span>
+      <span class="tally"><span class="ok" id="ok-count">0 aciertos</span><span class="ko" id="ko-count">0 errores</span></span>
+    </div>
+    <div class="bar" aria-hidden="true"><span id="progress-bar" style="width:0%"></span></div>
+  </section>
+
+  <section id="stage" aria-live="polite"></section>
+</main>
+
+<script>
+const TEMAS = {
+  1: 'Gestión clínica',
+  2: 'Gestión por procesos',
+  3: 'UGC e integración de profesionales',
+  4: 'Gobierno y transparencia',
+  5: 'Variabilidad de la práctica clínica',
+  6: 'Evaluación del desempeño',
+  7: 'Investigación traslacional',
+  8: 'GC en un área integrada',
+  9: 'Hospitales de día',
+  10: 'Unidades de salud mental',
+  11: 'Plan de calidad',
+  12: 'Responsabilidad social corporativa',
+  13: 'Evaluación de resultados de una UGC',
+  14: 'Ciclo de mejora'
+};
+
+// n = número en la guía, t = tema, o = opciones (orden de la guía), a = índice correcto, w = por qué
+const PREGUNTAS = [
+  { n: 1, t: 1, q: 'La gestión clínica se resume como:', o: ['La suma de la práctica clínica y la gestión de recursos', 'La gestión de recursos sin los clínicos', 'El control del gasto farmacéutico', 'La acreditación de los servicios'], a: 0, w: 'La gestión clínica es la suma de la práctica clínica y la gestión de recursos, con sentido común: la práctica va con evidencia y la gestión valora la efectividad frente a los costes.' },
+  { n: 2, t: 1, q: 'En el DAFO, las oportunidades y las amenazas salen del:', o: ['Análisis interno', 'Organigrama', 'Cartera de servicios', 'Análisis externo'], a: 3, w: 'Oportunidades y amenazas vienen de fuera del servicio (análisis externo). Fortalezas y debilidades salen de dentro (análisis interno).' },
+  { n: 3, t: 1, q: 'Los acuerdos de gestión clínica suelen ser:', o: ['Mensuales', 'Trimestrales', 'Anuales', 'Quinquenales'], a: 2, w: 'Los acuerdos o contratos de gestión son anuales y fijan objetivos asistenciales, de calidad, seguridad, gestión, docencia e investigación.' },
+  { n: 4, t: 1, q: '¿Qué figura creó Madrid en 2015 para coordinar atención primaria y especializada?', o: ['La Dirección de Continuidad Asistencial', 'La gerencia departamental', 'El Área de Gestión Integrada', 'El órgano de gestión'], a: 0, w: 'Madrid creó en 2015 la Dirección de Continuidad Asistencial (DCA), ubicada en el hospital y dependiente del gerente. La gerencia departamental es del modelo valenciano y el Área de Gestión Integrada es de Soria.' },
+  { n: 5, t: 2, q: 'Según la ISO 9000:2005, un proceso es:', o: ['Un conjunto de normas internas', 'Un organigrama funcional', 'Un indicador de resultado', 'Actividades relacionadas que transforman entradas en resultados'], a: 3, w: 'La ISO 9000:2005 define el proceso como un conjunto de actividades mutuamente relacionadas que transforman elementos de entrada en resultados.' },
+  { n: 6, t: 2, q: 'Los procesos que dan los recursos para que funcionen los procesos clave son los:', o: ['Estratégicos', 'Operativos', 'De soporte', 'Centinela'], a: 2, w: 'Los procesos de soporte o apoyo dan los recursos para que los clave (operativos) se lleven a cabo. Los estratégicos desarrollan la estrategia y fijan los objetivos.' },
+  { n: 7, t: 2, q: 'Sobre la monitorización, es correcto que:', o: ['Es el seguimiento de indicadores y por sí sola no mejora el proceso', 'Basta para mejorar el proceso', 'Sustituye al ciclo PDCA', 'Solo mide costes'], a: 0, w: 'El seguimiento de los indicadores se llama monitorización, y el PDF insiste: solo con monitorizar, el proceso no mejora. Hacen falta acciones de mejora con el ciclo PDCA.' },
+  { n: 8, t: 2, q: 'NO es una característica de un buen indicador:', o: ['Concreto', 'Clínicamente válido', 'Eficiente', 'Exhaustivo, que mida todo'], a: 3, w: 'Las 6 características son: concretos, objetivos, específicos, clínicamente válidos, relevantes (solo los necesarios) y eficientes. Medirlo todo va contra la relevancia y la eficiencia.' },
+  { n: 9, t: 3, q: 'NO es una de las 8 barreras de la gestión clínica:', o: ['Cultura', 'Transparencia', 'Estilos de práctica clínica', 'Financiación capitativa'], a: 3, w: 'Las 8 barreras son cultura, liderazgo, organización, estrategia, formación en gestión, estilos de práctica, sistemas de información y transparencia («CLOE FEST»). La financiación capitativa es un pilar del modelo valenciano.' },
+  { n: 10, t: 3, q: 'La gestión de los centros sanitarios corresponde a la:', o: ['Macrogestión', 'Mesogestión', 'Microgestión', 'Autogestión'], a: 1, w: 'Macrogestión es el Estado (equidad y fallos del mercado); mesogestión, la gestión de centros; microgestión, la gestión de la práctica clínica (Del Llano, 2014).' },
+  { n: 11, t: 3, q: '«Que la gestión sea más clínica y la clínica más gestora» es una frase de:', o: ['Ortún', 'Deming', 'Minué', 'Ouchi'], a: 2, w: 'La frase es de S. Minué. Ortún es quien define «gestión» como coordinar y motivar, y «clínica» como las decisiones diagnósticas y terapéuticas.' },
+  { n: 12, t: 4, q: 'El COCASEP es un órgano:', o: ['Colegiado de carácter técnico consultivo', 'Ejecutivo y sancionador', 'De financiación', 'Judicial'], a: 0, w: 'El COCASEP es un órgano colegiado de carácter técnico consultivo: analiza los problemas de calidad y define acciones de mejora continua y de seguridad del paciente.' },
+  { n: 13, t: 4, q: 'El secretario técnico del COCASEP es:', o: ['El director del establecimiento', 'La jefatura de enfermería', 'El gestor de calidad', 'Un aval ciudadano'], a: 2, w: 'El presidente es el director del establecimiento y el secretario técnico es el gestor de calidad, que coordina el Plan de Mejora Continua (PMC).' },
+  { n: 14, t: 4, q: 'Las tres esferas de una organización, según Chiavenato y Sapiro, son:', o: ['Gerencial, técnica y social', 'Política, económica y legal', 'Clínica, docente e investigadora', 'Estratégica, operativa y de soporte'], a: 0, w: 'Toda organización tiene un sistema gerencial (administración y objetivos), uno técnico (flujo de procesos y estándares) y uno social (talento humano y cultura).' },
+  { n: 15, t: 5, q: 'Si la evidencia existe pero el profesional no la conoce o no la aplica, la variabilidad se debe a:', o: ['Incertidumbre', 'Ignorancia', 'La población', 'La oferta de servicios'], a: 1, w: 'Ignorancia: la evidencia existe, pero no se conoce o no se aplica. Incertidumbre: no hay evidencia sobre cuál alternativa es mejor.' },
+  { n: 16, t: 5, q: 'La medicina basada en la evidencia (MBE) es el uso ___ de la mejor evidencia disponible:', o: ['Rápido, barato y sencillo', 'Obligatorio y uniforme', 'Intuitivo y personal', 'Consciente, explícito y juicioso'], a: 3, w: 'La MBE es el uso consciente, explícito y juicioso de la mejor evidencia científica disponible para decidir sobre el cuidado de cada paciente.' },
+  { n: 17, t: 5, q: 'El Programa Nacional de Guías de Práctica Clínica de México nació en:', o: ['1999', '2003', '2007', '2012'], a: 2, w: 'Nació en 2007, coordinado a través del CENETEC, que integra el Catálogo Maestro de GPC.' },
+  { n: 18, t: 5, q: 'El MECIC mide el apego a las GPC con:', o: ['11 algoritmos', '28 indicadores', '16 dimensiones', '51 indicadores'], a: 0, w: 'El MECIC usa 11 algoritmos de atención clínica y se captura cada cuatrimestre. 28 indicadores es INDICAS, 16 dimensiones INCLASNS y 51 indicadores el PAF británico.' },
+  { n: 19, t: 5, q: 'La medicina de las 4P es:', o: ['Preventiva, predictiva, personalizada y participativa', 'Pública, privada, primaria y paliativa', 'Planificar, prevenir, priorizar y proteger', 'Paciente, profesional, proceso y presupuesto'], a: 0, w: 'Preventiva, predictiva, personalizada y participativa. Su idea central: atender enfermos, no enfermedades.' },
+  { n: 20, t: 6, q: 'INDICAS mide la calidad con:', o: ['274 líneas de acción', '7 indicadores y 23 programas', '111 variables, 28 indicadores y 8 índices', '51 indicadores en 6 dimensiones'], a: 2, w: 'INDICAS: 111 variables forman 28 indicadores, que dan 8 índices en 3 rubros (trato digno, organización de los servicios y atención médica efectiva). 274 líneas es PROSESA; 7 y 23, Caminando a la Excelencia.' },
+  { n: 21, t: 6, q: 'El PAF del NHS británico tiene:', o: ['4 dimensiones y 16 categorías', '18 indicadores', '16 dimensiones', '51 indicadores en 6 dimensiones'], a: 3, w: 'El PAF tiene 51 indicadores en 6 dimensiones. 4 dimensiones y 16 categorías es Canadá; 16 dimensiones, INCLASNS de España; 18 indicadores, la acreditación de Australia.' },
+  { n: 22, t: 6, q: 'El modelo canadiense se apoya, entre otros, en el informe Lalonde de:', o: ['1974', '1986', '1994', '2006'], a: 0, w: 'Lalonde es de 1974 (introduce los estilos de vida). Evans y Stoddart, de 1994 (determinantes de la salud).' },
+  { n: 23, t: 6, q: 'En el modelo de la OMS, los indicadores de equidad se relacionan con:', o: ['La mortalidad materna', 'Los subsidios y el coeficiente de Gini', 'Las barreras físicas', 'El gasto farmacéutico'], a: 1, w: 'La equidad se mide con los subsidios al sector salud y el coeficiente de Gini. Las barreras físicas y económicas son indicadores de acceso; la mortalidad materna, de resultado.' },
+  { n: 24, t: 6, q: 'Frente al modelo de la OMS, el de la OCDE:', o: ['Añade ponderaciones a las metas', 'Excluye los indicadores de resultados', 'Amplía la evaluación a toda la salud pública', 'Excluye cualquier ponderación de las metas'], a: 3, w: 'La OCDE adopta el modelo de la OMS, pero excluye cualquier ponderación para evaluar metas y se limita a la asistencia médica. Sí incluye indicadores de resultados.' },
+  { n: 25, t: 7, q: 'La fase T2 de la investigación traslacional es:', o: ['La investigación básica', 'Las posibles aplicaciones de la básica', 'La aplicación en la comunidad, en contextos reales', 'Mantener el beneficio de forma sostenida'], a: 2, w: 'T0 investigación básica, T1 posibles aplicaciones, T2 aplicación en la comunidad en contextos reales, T3 máximo beneficio y T4 mantener el beneficio.' },
+  { n: 26, t: 7, q: 'La acreditación de los Institutos de Investigación Sanitaria se regula en:', o: ['La Ley 14/1986', 'El RD 1277/2003', 'El RD 339/2004', 'La Ley 16/2003'], a: 2, w: 'El RD 339/2004 regula la acreditación de los IIS. El RD 1277/2003 define el hospital de día; la Ley 14/1986 es la General de Sanidad y la 16/2003, la de Cohesión y Calidad.' },
+  { n: 27, t: 8, q: 'Una barrera para integrar los niveles asistenciales es:', o: ['La falta de coordinación administrativa entre niveles', 'El exceso de incentivos al personal', 'La gerencia única de área', 'La telemedicina'], a: 0, w: 'Las barreras son la falta de coordinación administrativa entre niveles, los pobres incentivos al personal y las estructuras burocráticas rígidas.' },
+  { n: 28, t: 9, q: 'La definición legal de hospital de día está en:', o: ['El RD 1277/2003', 'El RD 339/2004', 'La Ley 11/2017', 'El documento COM 2002 347'], a: 0, w: 'El RD 1277/2003 define el hospital de día, la cirugía mayor y menor ambulatoria y la diálisis.' },
+  { n: 29, t: 9, q: '¿En qué hospital de día el anestesista da el alta y se abre antes que el resto del hospital?', o: ['Médico', 'Quirúrgico', 'Oncológico', 'Psiquiátrico'], a: 1, w: 'El hospital de día quirúrgico abre antes para que el primer paciente del parte quirúrgico esté listo a tiempo, y es el anestesista quien da el alta.' },
+  { n: 30, t: 9, q: 'Entre 2000 y 2007, las plazas de hospital de día en España llegaron a:', o: ['2,3 por 1000 habitantes', '233 por 100 000 habitantes', '0,23 por 100 000 habitantes', '23,3 por 100 000 habitantes'], a: 3, w: 'Mientras las camas bajaban, las plazas de hospital de día se duplicaron hasta 23,3 por 100 000 habitantes.' },
+  { n: 31, t: 10, q: 'La estancia media en una unidad de agudos de salud mental no debería pasar de:', o: ['72 horas', '15 días', '3 a 4 meses', '9 meses'], a: 1, w: 'Agudos: máximo 15 días. Subagudos: máximo 3 a 4 meses. Rehabilitación intensiva: unos 6 meses y nunca más de 9.' },
+  { n: 32, t: 10, q: 'La estancia en una unidad de rehabilitación intensiva es de:', o: ['Unos 15 días', '3 a 4 meses', 'Unos 6 meses, nunca más de 9', 'Más de un año'], a: 2, w: 'La rehabilitación intensiva tiene una estancia media de unos 6 meses, nunca mayor de 9. Es para trastorno mental grave refractario.' },
+  { n: 33, t: 10, q: 'Con la regla de los tres tercios, el dinero ahorrado se reparte entre:', o: ['Estado, comunidad y hospital', 'Pacientes, familias y profesionales', 'Investigación, docencia y asistencia', 'Nómina de los trabajadores, UGC y hospital o centro'], a: 3, w: 'Un tercio va a la nómina de los trabajadores, un tercio a la UGC y un tercio al hospital, centro de salud o estructura intermedia.' },
+  { n: 34, t: 10, q: 'El principio ético que busca «lo mejor posible para todos los enfermos» es:', o: ['Beneficencia', 'No maleficencia', 'Autonomía', 'Justicia o equidad'], a: 3, w: 'La justicia o equidad busca lo mejor para todos los enfermos, frente al tradicional «lo mejor para mi paciente». Tiene pleno sentido en sistemas con financiación pública.' },
+  { n: 35, t: 11, q: 'En el método de trabajo del plan de calidad, el paso que «a veces se olvida» es:', o: ['Averiguar qué necesita el cliente', 'Prestar el servicio', 'Volver a empezar', 'Definir el estándar'], a: 2, w: 'El paso 8, «volvemos a empezar», es el que a veces se olvida, y el PDF lo llama garantía de éxito en los modelos de mejora.' },
+  { n: 36, t: 11, q: 'El modelo de desajustes (gaps) para detectar barreras es de:', o: ['Juran', 'Parasuraman, Zeithaml y Berry', 'Shewhart', 'Evans y Stoddart'], a: 1, w: 'El modelo de los gaps es de Parasuraman, Zeithaml y Berry. Shewhart creó el PDCA y Evans y Stoddart están en el modelo canadiense.' },
+  { n: 37, t: 12, q: 'NO es responsabilidad social corporativa según el tema 12:', o: ['La triple cuenta de resultados', 'Los compromisos voluntarios más allá de la ley', 'El marketing con causa', 'Una memoria de RSC con indicadores'], a: 2, w: 'El marketing con causa no es RSC, como tampoco la filantropía estratégica, la imagen corporativa ni la gestión medioambiental por sí sola.' },
+  { n: 38, t: 12, q: 'El modelo EFQM incluyó la RSC como eje transversal en:', o: ['1999', '2004', '2001', '2015'], a: 1, w: 'Fue en 2004. En 1999 nacieron el Pacto Mundial y la GRI, y en 2001 fue el Consejo Europeo de Gotemburgo.' },
+  { n: 39, t: 13, q: 'Un indicador que, si no se cumple, anula la evaluación de toda una dimensión es:', o: ['Sintético', 'Centinela', 'Llave', 'Dicotómico'], a: 2, w: 'Los indicadores llave son de obligado cumplimiento. El sintético resume varios en una cifra y el dicotómico se responde sí o no.' },
+  { n: 40, t: 13, q: 'El último paso de la evaluación secuencial de una UGC es:', o: ['La autoevaluación individual', 'Una auditoría externa privada', 'La encuesta de satisfacción', 'Una reunión a tres bandas: gerencia del servicio de salud, dirección del centro y UGC'], a: 3, w: 'La evaluación se aprueba en una reunión a tres bandas entre la gerencia del servicio de salud, la dirección del centro y los responsables de la UGC.' },
+  { n: 41, t: 14, q: 'Los círculos de calidad llegaron a España de la mano de:', o: ['El INSALUD, en 1949', 'Ford, en 1980', 'Toyota, en 1950', 'El Ministerio de Sanidad, en 2006'], a: 1, w: 'El primer círculo de calidad fue en Japón en 1949; en España los introdujo Ford en 1980.' },
+  { n: 42, t: 14, q: 'Un equipo de mejora no debe tener más de:', o: ['4 miembros', '8 miembros', '12 miembros', '20 miembros'], a: 1, w: 'No más de 8 miembros. Importa más la capacidad y la competencia de cada uno que el número.' },
+  { n: 43, t: 14, q: 'En el ciclo PDCA, comparar los indicadores con los objetivos es la fase:', o: ['Plan', 'Do', 'Check', 'Act'], a: 2, w: 'Check es verificar: comparar los indicadores con los objetivos. Plan planifica, Do implanta el cambio y Act incorpora la mejora.' }
+];
+
+const LETRAS = ['A', 'B', 'C', 'D'];
+const META = 80; // % de aciertos sugerido
+const STORE_KEY = 'quiz-gestion-salud-falladas';
+
+const $ = (id) => document.getElementById(id);
+const byN = new Map(PREGUNTAS.map((p) => [p.n, p]));
+
+function loadFailed() {
+  try {
+    const raw = localStorage.getItem(STORE_KEY);
+    const arr = raw ? JSON.parse(raw) : [];
+    return new Set(Array.isArray(arr) ? arr.filter((n) => byN.has(n)) : []);
+  } catch (e) {
+    return new Set();
+  }
+}
+function saveFailed() {
+  try { localStorage.setItem(STORE_KEY, JSON.stringify([...failed])); } catch (e) { /* sin almacenamiento: seguimos en memoria */ }
+}
+
+let failed = loadFailed();
+
+const state = {
+  mode: 'orden',
+  tema: 0,
+  mezclar: true,
+  queue: [],
+  perms: {},
+  idx: 0,
+  answers: {},
+  finished: false
+};
+
+function shuffle(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function buildQueue() {
+  let list = PREGUNTAS.filter((p) => !state.tema || p.t === state.tema);
+  if (state.mode === 'falladas') list = list.filter((p) => failed.has(p.n));
+  let ids = list.map((p) => p.n);
+  if (state.mode === 'azar' || state.mode === 'falladas') ids = shuffle(ids);
+  state.queue = ids;
+  state.perms = {};
+  ids.forEach((n) => { state.perms[n] = state.mezclar ? shuffle([0, 1, 2, 3]) : [0, 1, 2, 3]; });
+  state.idx = 0;
+  state.answers = {};
+  state.finished = false;
+}
+
+function counts() {
+  let ok = 0, ko = 0;
+  for (const [n, choice] of Object.entries(state.answers)) {
+    if (byN.get(Number(n)).a === choice) ok++; else ko++;
+  }
+  return { ok, ko };
+}
+
+function plural(n, uno, varios) { return `${n} ${n === 1 ? uno : varios}`; }
+
+function renderControls() {
+  document.querySelectorAll('.seg button').forEach((b) => {
+    b.setAttribute('aria-pressed', String(b.dataset.mode === state.mode));
+  });
+  $('tema').value = String(state.tema);
+  $('mezclar').checked = state.mezclar;
+  $('failed-count').textContent = failed.size;
+}
+
+function renderMeter() {
+  const total = state.queue.length;
+  const { ok, ko } = counts();
+  const answered = ok + ko;
+  if (!total) {
+    $('progress-text').textContent = 'Sin preguntas en esta selección';
+  } else if (state.finished) {
+    $('progress-text').textContent = `Ronda terminada · ${plural(total, 'pregunta', 'preguntas')}`;
+  } else {
+    $('progress-text').textContent = `Pregunta ${state.idx + 1} de ${total}`;
+  }
+  $('ok-count').textContent = plural(ok, 'acierto', 'aciertos');
+  $('ko-count').textContent = plural(ko, 'error', 'errores');
+  $('progress-bar').style.width = total ? `${(answered / total) * 100}%` : '0%';
+}
+
+function render() {
+  renderControls();
+  renderMeter();
+  const stage = $('stage');
+  if (!state.queue.length) {
+    stage.innerHTML = `
+      <div class="card">
+        <h2>No hay preguntas falladas guardadas${state.tema ? ' en este tema' : ''}</h2>
+        <p class="note">Las preguntas que contestes mal se guardan aquí para repasarlas. Contesta una ronda primero.</p>
+        <div class="actions"><span></span><button type="button" class="btn" id="go-orden">Empezar en orden</button></div>
+      </div>`;
+    $('go-orden').addEventListener('click', () => { state.mode = 'orden'; buildQueue(); render(); });
+    return;
+  }
+  if (state.finished) { renderResults(stage); return; }
+  renderQuestion(stage);
+}
+
+function renderQuestion(stage) {
+  const n = state.queue[state.idx];
+  const p = byN.get(n);
+  const perm = state.perms[n];
+  const chosen = state.answers[n];
+  const done = chosen !== undefined;
+  const isLast = state.idx === state.queue.length - 1;
+
+  const optsHtml = perm.map((orig, i) => {
+    let cls = 'opt', verdict = '';
+    if (done) {
+      if (orig === p.a) { cls += ' is-right'; verdict = orig === chosen ? 'Acertaste' : 'Correcta'; }
+      else if (orig === chosen) { cls += ' is-wrong'; verdict = 'Tu respuesta'; }
+      else cls += ' is-dim';
+    }
+    return `<li><button type="button" class="${cls}" id="opt-${i}" data-i="${i}" ${done ? 'disabled' : ''}>
+      <span class="letter" aria-hidden="true">${LETRAS[i]}</span>
+      <span class="opt-text">${p.o[orig]}</span>
+      <span class="verdict">${verdict}</span>
+    </button></li>`;
+  }).join('');
+
+  let feedback = '';
+  if (done) {
+    const right = chosen === p.a;
+    const correctLetter = LETRAS[perm.indexOf(p.a)];
+    feedback = `<div class="why ${right ? '' : 'miss'}">
+      <p class="why-title">${right ? 'Correcto.' : `No era esa. La correcta es la ${correctLetter}: ${p.o[p.a]}.`}</p>
+      <p>${p.w}</p>
+      <p class="ref">Para repasar: <a href="guia.html#tema-${p.t}">Tema ${p.t} · ${TEMAS[p.t]}</a></p>
+    </div>`;
+  }
+
+  stage.innerHTML = `
+    <article class="card">
+      <div class="qhead">
+        <span class="tag">Tema ${p.t} · ${TEMAS[p.t]}</span>
+        <span class="qnum">Pregunta ${p.n} de la guía</span>
+      </div>
+      <p class="qtext">${p.q}</p>
+      <ol class="opts">${optsHtml}</ol>
+      ${feedback}
+      <div class="actions">
+        <span class="hint">${done ? 'Enter para continuar' : 'Teclas A, B, C o D para responder'}</span>
+        <button type="button" class="btn" id="next" ${done ? '' : 'disabled'}>${isLast ? 'Ver resultado' : 'Siguiente pregunta'}</button>
+      </div>
+    </article>`;
+
+  stage.querySelectorAll('.opt').forEach((b) => b.addEventListener('click', () => answer(Number(b.dataset.i))));
+  $('next').addEventListener('click', next);
+  if (done) $('next').focus();
+}
+
+function answer(displayIdx) {
+  if (state.finished) return;
+  const n = state.queue[state.idx];
+  if (state.answers[n] !== undefined) return;
+  const p = byN.get(n);
+  const orig = state.perms[n][displayIdx];
+  state.answers[n] = orig;
+  if (orig === p.a) failed.delete(n); else failed.add(n);
+  saveFailed();
+  render();
+}
+
+function next() {
+  const n = state.queue[state.idx];
+  if (state.answers[n] === undefined) return;
+  if (state.idx >= state.queue.length - 1) state.finished = true;
+  else state.idx++;
+  render();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function renderResults(stage) {
+  const { ok, ko } = counts();
+  const answered = ok + ko;
+  const pct = answered ? Math.round((ok / answered) * 100) : 0;
+  const cumple = pct >= META;
+
+  const porTema = {};
+  for (const [n, choice] of Object.entries(state.answers)) {
+    const p = byN.get(Number(n));
+    porTema[p.t] = porTema[p.t] || { ok: 0, total: 0 };
+    porTema[p.t].total++;
+    if (p.a === choice) porTema[p.t].ok++;
+  }
+  const temasHtml = Object.keys(porTema).map(Number).sort((a, b) => a - b).map((t) => {
+    const r = porTema[t];
+    const w = Math.round((r.ok / r.total) * 100);
+    return `<li class="tema-row">
+      <span class="name">Tema ${t} · ${TEMAS[t]}</span>
+      <span class="mini" aria-hidden="true"><span style="width:${w}%"></span></span>
+      <span class="count">${r.ok}/${r.total}</span>
+    </li>`;
+  }).join('');
+
+  const flojos = Object.keys(porTema).map(Number).filter((t) => porTema[t].ok / porTema[t].total < 0.7);
+  const consejo = flojos.length
+    ? `Repasa en la guía: ${flojos.map((t) => `<a href="guia.html#tema-${t}">Tema ${t}</a>`).join(', ')} (menos del 70 % de aciertos).`
+    : 'Ningún tema quedó por debajo del 70 % de aciertos.';
+
+  stage.innerHTML = `
+    <article class="card">
+      <div>
+        <p class="eyebrow">Resultado de la ronda</p>
+        <h2>Ficha del indicador</h2>
+      </div>
+      <div class="table-scroll">
+        <table class="ficha">
+          <tr><th scope="row">Objetivo</th><td>Llegar preparado al examen de Gestión en Salud</td></tr>
+          <tr><th scope="row">Nombre del indicador</th><td>Porcentaje de aciertos en el quiz</td></tr>
+          <tr><th scope="row">Fórmula</th><td>Aciertos ÷ preguntas respondidas × 100</td></tr>
+          <tr><th scope="row">Población</th><td>${plural(answered, 'pregunta respondida', 'preguntas respondidas')}${state.tema ? ` del tema ${state.tema}` : ''}</td></tr>
+          <tr><th scope="row">Resultado</th><td><span class="big">${pct} %</span><span class="pill ${cumple ? 'ok' : 'ko'}">${cumple ? 'Cumple' : 'Por debajo'}</span><br><span class="note">${plural(ok, 'acierto', 'aciertos')} y ${plural(ko, 'error', 'errores')}</span></td></tr>
+          <tr><th scope="row">Estándar orientativo</th><td>≥ ${META} % (meta sugerida para practicar, no la del examen)</td></tr>
+        </table>
+      </div>
+      <div style="display:grid;gap:12px">
+        <h2 style="font-size:1.1rem">Aciertos por tema</h2>
+        <ul class="temas">${temasHtml}</ul>
+        <p class="note">${consejo}</p>
+      </div>
+      <div class="actions">
+        <button type="button" class="btn ghost" id="again">Otra ronda</button>
+        <button type="button" class="btn" id="review" ${failed.size ? '' : 'disabled'}>Repasar mis falladas (${failed.size})</button>
+      </div>
+    </article>`;
+
+  $('again').addEventListener('click', () => { buildQueue(); render(); });
+  $('review').addEventListener('click', () => { state.mode = 'falladas'; state.tema = 0; buildQueue(); render(); });
+}
+
+function setupControls() {
+  const sel = $('tema');
+  sel.innerHTML = `<option value="0">Todos los temas</option>` +
+    Object.entries(TEMAS).map(([t, name]) => `<option value="${t}">Tema ${t} · ${name}</option>`).join('');
+  document.querySelectorAll('.seg button').forEach((b) => b.addEventListener('click', () => {
+    state.mode = b.dataset.mode;
+    buildQueue();
+    render();
+  }));
+  sel.addEventListener('change', () => { state.tema = Number(sel.value); buildQueue(); render(); });
+  $('mezclar').addEventListener('change', (e) => { state.mezclar = e.target.checked; buildQueue(); render(); });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    const tag = (e.target && e.target.tagName) || '';
+    if (tag === 'SELECT' || tag === 'INPUT') return;
+    if (state.finished || !state.queue.length) return;
+    const k = e.key.toLowerCase();
+    const map = { a: 0, b: 1, c: 2, d: 3, '1': 0, '2': 1, '3': 2, '4': 3 };
+    if (k in map) { e.preventDefault(); answer(map[k]); }
+    else if (k === 'enter' && state.answers[state.queue[state.idx]] !== undefined) {
+      if (tag === 'BUTTON') return; // el botón enfocado ya maneja Enter
+      e.preventDefault(); next();
+    }
+  });
+}
+
+function start(data) {
+  setupControls();
+  const saved = data && data.state;
+  if (saved && Array.isArray(saved.queue)) Object.assign(state, saved);
+  else buildQueue();
+  render();
+}
+
+start({});
+</script>
+</body>
+</html>

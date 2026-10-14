@@ -1,0 +1,81 @@
+/* Estilos compartidos de la portada y la guía (el quiz trae los suyos con los mismos colores) */
+:root {
+  --bg: #f2f5f7;
+  --surface: #ffffff;
+  --ink: #16212a;
+  --muted: #586874;
+  --line: #d4dce2;
+  --accent: #2e4ca8;
+  --accent-soft: #e2e8f7;
+  --on-accent: #ffffff;
+  --good: #1d7445;
+  --good-soft: #def0e5;
+  --font-display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f151a;
+    --surface: #172029;
+    --ink: #e4ebf0;
+    --muted: #98a9b5;
+    --line: #2a3742;
+    --accent: #8ea7f3;
+    --accent-soft: #1e2946;
+    --on-accent: #0c1430;
+    --good: #5ec88c;
+    --good-soft: #13301f;
+    color-scheme: dark;
+  }
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 64px; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+.wrap {
+  max-width: 44rem;
+  margin: 0 auto;
+  padding-inline: 16px;
+  padding-block: 24px 64px;
+}
+h1, h2, h3 {
+  font-family: var(--font-display);
+  text-wrap: balance;
+  line-height: 1.2;
+}
+h1 { font-size: clamp(1.7rem, 6vw, 2.3rem); font-weight: 700; letter-spacing: -0.01em; margin: 0; }
+h2 { font-size: 1.45rem; font-weight: 700; margin: 2.4rem 0 0.8rem; padding-top: 1.2rem; border-top: 1px solid var(--line); }
+h3 { font-size: 1.15rem; font-weight: 700; margin: 2rem 0 0.6rem; }
+p { margin: 0.7rem 0; }
+ul, ol { margin: 0.6rem 0; padding-left: 1.3rem; }
+li { margin: 0.35rem 0; }
+li::marker { color: var(--muted); }
+strong { font-weight: 700; }
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible, .btn:focus-visible, .chip:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 8px;
+}
+.lede { color: var(--muted); margin-top: 10px; }
+.backlink { font-size: 0.95rem; display: inline-block; margin-bottom: 14px; }
+.foot { margin-top: 3rem; font-size: 0.88rem; color: var(--muted); border-top: 1px solid var(--line); padding-top: 1rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition: none !important; }
+}

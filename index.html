@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#2e4ca8">
+<title>Estudio de Gestión en Salud</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="estilos.css">
+<style>
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.stats li { margin: 0; }
+.stats b { color: var(--ink); font-weight: 600; }
+.doors { display: grid; gap: 14px; margin-top: 28px; }
+.door {
+  display: grid;
+  gap: 6px;
+  text-decoration: none;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  border-radius: 12px;
+  padding: 20px 22px;
+  transition: border-color 0.15s ease;
+}
+.door:hover { border-color: var(--accent); }
+.door.main { border-color: var(--accent); background: var(--accent-soft); }
+.door-title { font-family: var(--font-display); font-size: 1.35rem; font-weight: 700; display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+.door-title span:last-child { color: var(--accent); font-size: 1.2rem; }
+.door p { margin: 0; color: var(--muted); }
+.more { margin-top: 26px; display: grid; gap: 4px; }
+.more h2 { font-size: 1rem; margin: 0 0 6px; padding: 0; border: 0; font-family: var(--font-mono); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.more ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 2px; }
+.more a { display: block; padding: 10px 0; border-bottom: 1px solid var(--line); text-decoration: none; }
+.more a small { color: var(--muted); display: block; font-size: 0.85rem; }
+@media (min-width: 640px) {
+  .doors { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <p class="eyebrow">Maestría en Dirección y Administración en Salud · UNIR</p>
+  <h1>Estudio de Gestión en Salud</h1>
+  <p class="lede">Guía resumida de los 14 temas y quiz de práctica para el examen de octubre. Primero estudia la guía y después ponte a prueba con el quiz.</p>
+  <ul class="stats" aria-label="En números">
+    <li><b>14</b> temas</li>
+    <li><b>239</b> págs. del PDF → <b>29</b> hojas</li>
+    <li><b>53</b> términos</li>
+    <li><b>43</b> preguntas</li>
+  </ul>
+
+  <nav class="doors" aria-label="Secciones">
+    <a class="door main" href="guia.html">
+      <span class="door-title"><span>1. Leer la guía</span><span aria-hidden="true">→</span></span>
+      <p>Resumen de cada tema, glosario y repaso de último minuto.</p>
+    </a>
+    <a class="door" href="quiz.html">
+      <span class="door-title"><span>2. Hacer el quiz</span><span aria-hidden="true">→</span></span>
+      <p>43 preguntas con explicación al instante y repaso de las que falles.</p>
+    </a>
+  </nav>
+
+  <section class="more" aria-labelledby="atajos">
+    <h2 id="atajos">Atajos</h2>
+    <ul>
+      <li><a href="guia.html#repaso">Repaso de último minuto <small>Cifras, trucos para memorizar y confusiones típicas</small></a></li>
+      <li><a href="guia.html#glosario">Glosario <small>Los 53 términos y siglas, en orden alfabético</small></a></li>
+      <li><a href="guia-gestion-salud.pdf">PDF para imprimir <small>Tamaño carta, 29 hojas (1.2 MB)</small></a></li>
+    </ul>
+  </section>
+
+  <p class="foot">Resumen personal de estudio hecho a partir del material de la asignatura Gestión en Salud (UNIR). No incluye ni sustituye el material original del curso.</p>
+</main>
+</body>
+</html>

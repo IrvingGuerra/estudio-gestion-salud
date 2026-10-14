@@ -1,0 +1,635 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#2e4ca8">
+<title>Guía de Gestión en Salud</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="estilos.css">
+<style>
+html { scroll-behavior: smooth; }
+.temas-nav {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+  padding-top: env(safe-area-inset-top, 0px);
+}
+.temas-nav .fila {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding: 10px 16px;
+  max-width: 44rem;
+  margin: 0 auto;
+  scrollbar-width: none;
+}
+.temas-nav .fila::-webkit-scrollbar { display: none; }
+.chip {
+  flex: none;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  text-decoration: none;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  padding: 5px 11px;
+}
+.chip-quiz { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.ciclo {
+  margin: 1.4rem 0;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 18px;
+}
+.ciclo figcaption { font-family: var(--font-display); font-weight: 700; font-size: 1.1rem; margin-bottom: 12px; }
+.pasos { list-style: none; padding: 0; margin: 0; display: grid; gap: 18px; position: relative; }
+.pasos li {
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2px 10px;
+  border: 1.25px solid var(--line);
+  border-radius: 8px;
+  padding: 10px 12px;
+  position: relative;
+}
+.pasos li + li::before {
+  content: "↓";
+  position: absolute;
+  top: -19px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--muted);
+  font-size: 0.85rem;
+  line-height: 1;
+}
+.paso-nombre { font-weight: 700; }
+.paso-temas { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); align-self: center; }
+.paso-que { grid-column: 1 / -1; font-size: 0.93rem; color: var(--muted); }
+.vuelta { margin: 12px 0 0; font-weight: 700; color: var(--accent); }
+.marcos { display: grid; gap: 10px; margin-top: 14px; }
+.marcos div { background: var(--accent-soft); border-radius: 8px; padding: 10px 12px; display: grid; gap: 2px; font-size: 0.93rem; }
+.callout {
+  margin-top: 2.4rem;
+  background: var(--accent-soft);
+  border-radius: 12px;
+  padding: 4px 18px 10px;
+}
+.callout h2 { border: 0; margin-top: 0.8rem; padding-top: 0; }
+.btn {
+  display: inline-block;
+  font-weight: 700;
+  text-decoration: none;
+  background: var(--accent);
+  color: var(--on-accent);
+  border-radius: 8px;
+  padding: 10px 18px;
+}
+@media (min-width: 640px) {
+  .marcos { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+<nav class="temas-nav" aria-label="Ir a un tema"><div class="fila"><a class="chip" href="#como-usar">Inicio</a><a class="chip" href="#tema-1">T1</a><a class="chip" href="#tema-2">T2</a><a class="chip" href="#tema-3">T3</a><a class="chip" href="#tema-4">T4</a><a class="chip" href="#tema-5">T5</a><a class="chip" href="#tema-6">T6</a><a class="chip" href="#tema-7">T7</a><a class="chip" href="#tema-8">T8</a><a class="chip" href="#tema-9">T9</a><a class="chip" href="#tema-10">T10</a><a class="chip" href="#tema-11">T11</a><a class="chip" href="#tema-12">T12</a><a class="chip" href="#tema-13">T13</a><a class="chip" href="#tema-14">T14</a><a class="chip" href="#glosario">Glosario</a><a class="chip" href="#repaso">Repaso</a><a class="chip chip-quiz" href="quiz.html">Quiz</a></div></nav>
+<main class="wrap">
+  <a class="backlink" href="index.html">← Inicio</a>
+  <p class="eyebrow">Gestión en Salud · UNIR · 14 temas</p>
+  <h1>Guía de estudio</h1>
+<h2 id="como-usar">Cómo usar esta guía</h2>
+<p>El PDF son 14 temas (239 páginas) de la asignatura Gestión en Salud, de la Maestría en Dirección y Administración en Salud (UNIR). Esta guía lo reduce a lo que más se pregunta: definiciones, listas, siglas y cifras.</p>
+<ol>
+<li>Mira el ciclo de abajo: casi todos los temas son una pieza del mismo ciclo (planificar, organizar, pactar, evaluar y mejorar).</li>
+<li>Estudia el resumen de cada tema. Lo que está en <strong>negritas</strong> es lo más preguntable.</li>
+<li>Repasa el glosario tratando de definir cada término antes de leerlo.</li>
+<li>Practica con el <a href="quiz.html">quiz de 43 preguntas</a> y regresa a los temas donde falles.</li>
+<li>La víspera, lee solo el repaso de último minuto.</li>
+</ol>
+<p><strong>Mapa del temario</strong> (entre paréntesis, las páginas del PDF)</p>
+<ul>
+<li><strong>Tema 1 · Gestión clínica</strong> (págs. 1–20): fases, DAFO, acuerdos de gestión, área integrada.</li>
+<li><strong>Tema 2 · Gestión por procesos</strong> (21–34): proceso, mapa de procesos, indicadores.</li>
+<li><strong>Tema 3 · UGC e integración de profesionales</strong> (35–47): 7 principios y 8 barreras.</li>
+<li><strong>Tema 4 · Gobierno, transparencia y rendición de cuentas</strong> (48–69): contexto, COCASEP, órgano de gestión.</li>
+<li><strong>Tema 5 · Variabilidad de la práctica clínica</strong> (70–87): MBE, GPC, CENETEC, MECIC.</li>
+<li><strong>Tema 6 · Evaluación del desempeño</strong> (88–109): indicadores de México y modelos internacionales.</li>
+<li><strong>Tema 7 · Investigación traslacional</strong> (110–117): fases T0–T4.</li>
+<li><strong>Tema 8 · GC en un área integrada</strong> (118–124): atención primaria + especializada.</li>
+<li><strong>Tema 9 · Hospitales de día</strong> (125–143): definiciones legales, tipos, organización.</li>
+<li><strong>Tema 10 · Unidades de salud mental</strong> (144–176): unidades, estancias, indicadores, estigma.</li>
+<li><strong>Tema 11 · Plan de calidad</strong> (177–199): 15 recomendaciones, cuadro de mando.</li>
+<li><strong>Tema 12 · RSC</strong> (200–210): triple cuenta, qué no es RSC, 11 áreas.</li>
+<li><strong>Tema 13 · Evaluación de resultados de una UGC</strong> (211–225): SMART, indicadores, evaluación en fases.</li>
+<li><strong>Tema 14 · Ciclo de mejora</strong> (226–239): equipos de mejora, PDCA, kaizen.</li>
+</ul>
+<p>Si tienes poco tiempo, prioriza los temas 1, 2, 6, 10, 13 y 14: son los que concentran más listas y cifras (es mi estimación, no algo que diga el temario).</p>
+
+<figure class="ciclo" aria-label="Los 14 temas forman un solo ciclo de gestión">
+  <figcaption>Los 14 temas forman un solo ciclo de gestión</figcaption>
+  <ol class="pasos">
+    <li><span class="paso-nombre">1. Planificar</span><span class="paso-temas">Temas 1 y 4</span><span class="paso-que">Análisis externo e interno, DAFO y estrategia</span></li>
+    <li><span class="paso-nombre">2. Organizar</span><span class="paso-temas">Temas 2, 3 y 5</span><span class="paso-que">Procesos, unidades de gestión clínica y guías (MBE)</span></li>
+    <li><span class="paso-nombre">3. Pactar objetivos</span><span class="paso-temas">Temas 1 y 13</span><span class="paso-que">Acuerdo de gestión anual con objetivos SMART</span></li>
+    <li><span class="paso-nombre">4. Evaluar</span><span class="paso-temas">Temas 6 y 13</span><span class="paso-que">Indicadores, desempeño y evaluación de resultados</span></li>
+    <li><span class="paso-nombre">5. Mejorar</span><span class="paso-temas">Temas 11 y 14</span><span class="paso-que">PDCA, equipos de mejora y plan de calidad</span></li>
+  </ol>
+  <p class="vuelta">↻ y el ciclo vuelve a empezar</p>
+  <div class="marcos">
+    <div><b>Se aplica en</b><span>Tema 8 · Área integrada AP-AE</span><span>Tema 9 · Hospital de día</span><span>Tema 10 · Salud mental</span></div>
+    <div><b>Lo enmarcan</b><span>Tema 4 · Gobierno y COCASEP</span><span>Tema 7 · Investigación traslacional</span><span>Tema 12 · Responsabilidad social</span></div>
+  </div>
+</figure>
+
+<p>Planificar, organizar, pactar, evaluar y mejorar es el esqueleto del curso; ubicar cada tema en su paso hace más fácil recordar sus listas.</p>
+<h2 id="resumen">Resumen por tema</h2>
+<p>Cada tema abre con su idea central en una línea y sigue con las listas, definiciones y cifras que el PDF repite o destaca.</p>
+<h3 id="tema-1">Tema 1. Gestión clínica</h3>
+<p><strong>Idea central:</strong> la gestión clínica (GC) es la <strong>suma de la práctica clínica y la gestión de recursos</strong>, con sentido común. La práctica va con evidencia y la gestión valora la efectividad frente a los costes.</p>
+<p><strong>Definición formal:</strong> organización estructural y funcional de un servicio, con despliegue estratégico vinculado a la organización, que acuerda y evalúa su gestión mediante el liderazgo clínico y de gestión, y que se plasma en los <strong>acuerdos de gestión</strong>. Debe ser participativa, <strong>orientada a procesos</strong> y basada en la <strong>continuidad asistencial</strong>.</p>
+<p><strong>Por qué cambiar:</strong> envejecimiento y cronicidad, nuevas tecnologías de información, innovación permanente, pacientes más activos y aumento del gasto sanitario.</p>
+<p><strong>Las 4 fases del proceso de GC</strong></p>
+<ul>
+<li><strong>Planificar:</strong> saber <strong>qué</strong> hacer (situación, objetivos, estrategias) con el análisis externo e interno y el <strong>DAFO</strong>.</li>
+<li><strong>Organizar:</strong> definir <strong>cómo</strong>: organigrama, cartera de servicios, estructura, procesos operativos, métodos, procedimientos y normas.</li>
+<li><strong>Dirigir o coordinar:</strong> liderar, comunicar y motivar; le toca al responsable del servicio.</li>
+<li><strong>Evaluar:</strong> medir con indicadores, retroalimentar a los profesionales y corregir.</li>
+</ul>
+<ul>
+<li><strong>DAFO:</strong> análisis externo = <strong>oportunidades</strong> (nos favorecen) y <strong>amenazas</strong> (nos perjudican); análisis interno = <strong>fortalezas</strong> y <strong>debilidades</strong>. Ojo: el PDF dice por error «fortalezas y amenazas» en el análisis interno.</li>
+<li><strong>Qué hacer con el DAFO:</strong> corregir debilidades, afrontar amenazas (innovar), mantener fortalezas y explorar oportunidades.</li>
+<li><strong>Gestionar = coordinar y motivar.</strong> Coordinar es planificar, organizar, distribuir trabajo y personas y aportar medios. Motivar es liderar, incentivar y crear cultura y clima.</li>
+<li><strong>Especialidades:</strong> salud mental (asistencia, promoción, prevención, rehabilitación e integración social); geriatría (paciente <strong>pluripatológico y frágil</strong>); pediatría (los <strong>padres</strong> forman parte de todo el proceso).</li>
+</ul>
+<p><strong>Acuerdos o contratos de gestión:</strong> instrumentos que garantizan los compromisos firmados entre un área de gestión y su gerencia. Son <strong>anuales</strong> y deben desplegarse a todos los profesionales.</p>
+<ul>
+<li><strong>5 elementos para prepararlo:</strong> plan anual de gestión del servicio de salud, planes de la especialidad (p. ej., cronicidad), plan estratégico del centro o área, plan estratégico del servicio y resultados anteriores.</li>
+<li><strong>11 tipos de objetivos:</strong> accesibilidad, actividad asistencial, resultado clínico, orientación al paciente, investigación e innovación, formación continuada, docencia, objetivos compartidos con otras unidades, cronicidad, educación sanitaria y continuidad asistencial.</li>
+<li><strong>Ficha de un indicador:</strong> objetivo, nombre, fórmula, población, fuente de datos, responsable, periodicidad y estándar. Ejemplo: satisfacción global en consulta externa, medida trimestral, estándar <strong>&gt; 95 %</strong>.</li>
+</ul>
+<p><strong>GC en un área integrada:</strong> modelo <strong>centrado en el ciudadano</strong> que da a los profesionales más autonomía y responsabilidad, y busca continuidad entre atención primaria (AP) y especializada (AE). La solución típica es la <strong>gerencia única de área</strong>.</p>
+<ul>
+<li><strong>Soria</strong> (Castilla y León): Área de Gestión Integrada creada en <strong>noviembre de 2011</strong>, ~1600 trabajadores, más de 120 M€; en 2015 fue la primera de España con el <strong>Sello de Excelencia Europea 500+</strong>.</li>
+<li><strong>Comunidad Valenciana:</strong> <strong>24 departamentos</strong> con 4 pilares: financiación capitativa, gestión integral, facturación entre departamentos y dirección por objetivos.</li>
+<li><strong>Madrid (2015):</strong> crea la <strong>Dirección de Continuidad Asistencial (DCA)</strong>, ubicada en el hospital y dependiente del gerente.</li>
+<li><strong>Críticas:</strong> hospitales hipertrofiados y AP burocratizada que atiende casos banales; se mantiene la doble estructura AP-AE, sin presupuesto único ni gestión por procesos.</li>
+</ul>
+<h3 id="tema-2">Tema 2. Gestión por procesos</h3>
+<p><strong>Idea central:</strong> las organizaciones son tan eficaces y eficientes como lo son sus procesos. Para implantar la gestión por procesos primero hay que <strong>identificar la estrategia</strong>, y el despliegue es <strong>paulatino y en cascada</strong>.</p>
+<ul>
+<li><strong>Proceso:</strong> conjunto de actuaciones, decisiones, actividades y tareas que se encadenan de forma <strong>secuencial y ordenada</strong> para conseguir un resultado que satisfaga plenamente al paciente o población.</li>
+<li><strong>Según ISO 9000:2005:</strong> actividades relacionadas que <strong>transforman entradas en resultados</strong>. El enfoque aparece en la familia ISO 9000 y en el modelo EFQM.</li>
+<li><strong>Características:</strong> <strong>variabilidad</strong> (cada repetición varía un poco) y <strong>repetitividad</strong> (permite mejorarlo).</li>
+<li><strong>Principios:</strong> interacciones entre procesos, requisitos de clientes internos y externos, mejora continua (eficacia y eficiencia) y ciclo PDCA.</li>
+<li><strong>Propietario del proceso:</strong> quien lo conoce, decide sobre él, lo supervisa y evalúa sus resultados.</li>
+</ul>
+<ul>
+<li><strong>Tipos de proceso:</strong> <strong>estratégicos</strong> (desarrollan la estrategia y fijan objetivos), <strong>operativos o clave</strong> (la actividad propia, en contacto con el cliente) y <strong>de soporte o apoyo</strong> (dan los recursos a los clave).</li>
+</ul>
+<p>Los tres juntos forman el <strong>mapa de procesos</strong>, que debe incluir las relaciones entre ellos.</p>
+<ul>
+<li><strong>Ficha de un proceso:</strong> entradas, salidas, procesos, secuencia de actividades, diagrama de flujo, recursos e indicadores.</li>
+<li><strong>Qué se mide:</strong> cantidad, calidad técnica (incluye indicadores centinela), calidad percibida (encuestas) y coste.</li>
+<li><strong>Criterio:</strong> lo que se desea obtener; para la Joint Commission, la condición que debe cumplir la práctica para ser de calidad. <strong>Indicador:</strong> medida cuantitativa de un criterio; puede haber varios por criterio. <strong>Estándar:</strong> el nivel aceptable.</li>
+<li><strong>Monitorización</strong> = seguimiento de indicadores. <strong>Solo monitorizar no mejora el proceso.</strong></li>
+<li><strong>6 características de un indicador:</strong> concreto, objetivo, específico, clínicamente válido, relevante y eficiente.</li>
+<li><strong>Cómo se mejora:</strong> primero hacer que ocurra como queremos (definir, realizar, comprobar); después aplicar acciones de mejora con PDCA. Toda mejora debe verse en los indicadores.</li>
+<li><strong>4 barreras:</strong> organizacionales («siempre hemos trabajado así»), actitudinales (cambio impuesto, lenguaje lejano a la clínica), carencias estructurales y de cualificación, y expectativas irreales.</li>
+<li><strong>5 ventajas:</strong> orientación al cliente, más eficacia y eficiencia, estructura las actividades, mejor seguimiento de resultados y facilita planificar objetivos.</li>
+</ul>
+<h3 id="tema-3">Tema 3. Unidades de gestión clínica e integración de profesionales</h3>
+<p><strong>Idea central:</strong> la GC integra a los profesionales, pero choca con 8 barreras. Se superan con <strong>liderazgo, apoyo institucional, formación y buenos sistemas de información</strong>.</p>
+<ul>
+<li><strong>UGC e institutos:</strong> instrumentos de integración. Las UGC integran dentro de un mismo servicio; los institutos incorporan varios servicios.</li>
+<li><strong>Según Ortún:</strong> «gestión» es coordinar y motivar personas; «clínica» son las decisiones diagnósticas y terapéuticas.</li>
+<li><strong>7 principios de la GC:</strong> integración de los profesionales, participación activa en los objetivos, autonomía, gestión por procesos, organización centrada en el paciente, medicina basada en la evidencia (MBE) y sistemas de información adecuados.</li>
+</ul>
+<p><strong>Las 8 barreras (problema → salida)</strong></p>
+<ul>
+<li><strong>Cultura:</strong> clínicos centrados en el diagnóstico y gestores en la actividad; variabilidad vista como derecho; se culpa a la persona y no al sistema; paternalismo → comunicación, misión y valores, incentivar.</li>
+<li><strong>Liderazgo:</strong> jefe orientado al control → <strong>jefe facilitador</strong> y trabajo horizontal.</li>
+<li><strong>Organización:</strong> organigramas verticales, metas no compartidas, poca autonomía económica → unidades interdisciplinares; <strong>autonomía unida a responsabilidad</strong> (Cabo, 2014).</li>
+<li><strong>Estrategia:</strong> no se apuesta por la GC o hay vaivenes → integrarla en los planes estratégicos.</li>
+<li><strong>Formación en gestión:</strong> pregrado y posgrado sin gestión, calidad ni bioética → exigirla a mandos y directivos.</li>
+<li><strong>Estilos de práctica:</strong> rutinas sin evidencia, desconexión médico-enfermería, líder autoritario → paciente en el centro y MBE.</li>
+<li><strong>Sistemas de información:</strong> pensados para directivos, no llegan al equipo → diálogo, datos depurados, cuadro de indicadores.</li>
+<li><strong>Transparencia:</strong> centros opacos → cartas de servicios, RSC, benchmarking.</li>
+</ul>
+<ul>
+<li><strong>Niveles de gestión (Del Llano, 2014):</strong> <strong>macrogestión</strong> = el Estado (equidad y fallos del mercado); <strong>mesogestión</strong> = gestión de centros; <strong>microgestión</strong> = gestión de la práctica clínica.</li>
+<li><strong>Frase de Minúé:</strong> «que la gestión sea más clínica y la clínica más gestora».</li>
+<li><strong>Conclusión:</strong> los obstáculos están identificados y son superables con metodología e integrando voluntades.</li>
+</ul>
+<h3 id="tema-4">Tema 4. Modelos de gobierno, transparencia y rendición de cuentas</h3>
+<p><strong>Idea central:</strong> el buen gobierno exige analizar el contexto externo e interno y profesionalizar la gestión con órganos transparentes. En México ese órgano de calidad es el <strong>COCASEP</strong>.</p>
+<ul>
+<li><strong>Contexto:</strong> el sistema público español vive una <strong>crisis sistémica de sostenibilidad</strong>. En <strong>2001</strong> la Comisión de las Comunidades Europeas asumió el informe de buen gobierno del Consejo de Europa. Ejemplo de norma: <strong>Ley 11/2017</strong> de Buen Gobierno y Profesionalización de la Gestión (Madrid). El autor sigue la postura de <strong>SEDISA</strong>.</li>
+<li><strong>Contexto externo:</strong> factores que la organización <strong>no controla</strong> (económicos, políticos, legales, tecnológicos, culturales); pueden ser amenazas u oportunidades.</li>
+<li><strong>Contexto interno:</strong> uso efectivo de los recursos, fortalezas, debilidades y <strong>capacidades dinámicas</strong> de adaptación.</li>
+<li><strong>3 esferas de toda organización</strong> (Chiavenato y Sapiro, 2017): sistema <strong>gerencial</strong> (administración y objetivos), <strong>técnico</strong> (flujo de procesos y estándares) y <strong>social</strong> (talento humano y cultura).</li>
+<li><strong>5 competencias del tomador de decisiones asertivo:</strong> dominio de sí mismo, comprender las percepciones de los clientes, visión amplia del futuro, generar un entorno colaborativo y <strong>razonamiento sistémico</strong>.</li>
+<li><strong>Nuevas circunstancias del entorno:</strong> densidad urbana, dinámicas sociales, recursos naturales limitados, cambio climático, innovación tecnológica, nivel educativo, migración y asentamientos en zonas de riesgo.</li>
+<li><strong>6 áreas funcionales:</strong> operaciones, marketing, investigación y desarrollo, finanzas, recursos humanos y la cadena de procesos de servicios de salud (la <strong>parte medular</strong>).</li>
+<li><strong>Modelo de Gestión de Calidad (México), 5 resultados de valor:</strong> salud de la población, acceso efectivo, organizaciones confiables y seguras, experiencia satisfactoria y costos razonables. La comunidad participa con el <strong>aval ciudadano</strong>.</li>
+</ul>
+<p><strong>COCASEP (Comité de Calidad y Seguridad del Paciente):</strong> órgano colegiado de carácter <strong>técnico consultivo</strong> que analiza los problemas de calidad y define acciones de mejora continua y seguridad del paciente. Su composición viene del DOF del 27/12/2012.</p>
+<ul>
+<li><strong>Presidente = director</strong> del establecimiento: preside, aprueba el orden del día, tiene <strong>voto de calidad</strong> en empate, autoriza subcomités, firma minutas y fija criterios de la Memoria Anual.</li>
+<li><strong>Secretario técnico = gestor de calidad:</strong> coordina el <strong>Plan de Mejora Continua (PMC)</strong>, convoca, hace minutas, da seguimiento, coordina la Memoria Anual y convoca a los avales ciudadanos.</li>
+<li><strong>Vocales:</strong> subdirector médico, subdirector administrativo, enseñanza o investigación, jefatura de enfermería y de trabajo social. Eligen casos, aplican la metodología, opinan sobre factibilidad y elaboran informes.</li>
+</ul>
+<p><strong>Órgano de gestión (propuesta para España):</strong> miembros natos de la Consejería de Sanidad y el resto nombrados por el órgano de gobierno. Lo preside la Consejería o Viceconsejería de Sanidad, y la Secretaría es del Servicio Autonómico de Salud.</p>
+<ul>
+<li><strong>Sus funciones clave:</strong> seleccionar y cesar a la <strong>dirección gerencia</strong> en un proceso público y transparente; la gerencia tiene <strong>voz y voto</strong> para elegir al resto de direcciones; participar en el contrato de gestión; aprobar y supervisar el plan estratégico; hacer visible a los ciudadanos la actividad, la calidad y el presupuesto.</li>
+<li><strong>También debe:</strong> reducir la variabilidad, humanizar la asistencia, integrar AP, urgencias y hospital, impulsar la telemedicina e incentivar según la <strong><em>lex artis</em></strong> (evidencia científica + centrada en el paciente).</li>
+<li><strong>Idea clave del tema:</strong> no hay una fórmula única de calidad; cada establecimiento diseña la suya según su realidad.</li>
+</ul>
+<h3 id="tema-5">Tema 5. Variabilidad de la práctica clínica</h3>
+<p><strong>Idea central:</strong> hay variabilidad porque las poblaciones son distintas, la oferta es diversa y los profesionales actúan distinto ante casos parecidos. La <strong>MBE</strong> es la mejor herramienta para reducirla.</p>
+<ul>
+<li><strong>Dos causas en los profesionales:</strong> <strong>incertidumbre</strong> (no existe evidencia sobre las alternativas) e <strong>ignorancia</strong> (la evidencia existe, pero no se conoce o no se aplica).</li>
+<li><strong>MBE:</strong> uso <strong>consciente, explícito y juicioso</strong> de la mejor evidencia disponible para decidir sobre el cuidado de los pacientes. Integra la experiencia clínica y las preferencias del paciente.</li>
+<li><strong>Guías de práctica clínica (GPC):</strong> recomendaciones basadas en MBE, experiencia de expertos y valores del paciente, para intervenciones efectivas, seguras y al mejor costo.</li>
+<li><strong>México:</strong> en <strong>2007</strong> nace el <strong>Programa Nacional de GPC</strong>, coordinado por la Subsecretaría de Integración y Desarrollo del Sector Salud a través del <strong>CENETEC</strong>, que integra el <strong>Catálogo Maestro de GPC</strong>.</li>
+</ul>
+<ul>
+<li><strong>Fuente 1, la propia población:</strong> estructura demográfica, nivel socioeconómico y escolar, prevalencia, factores de riesgo y gravedad. El sistema <strong>difícilmente</strong> puede influir.</li>
+<li><strong>Fuente 2, el sistema sanitario:</strong> recursos humanos, técnicos y financieros, cobertura, accesibilidad, <strong>incentivos económicos</strong>, capacitación, nuevas tecnologías y falta de equipo o especialistas. Aquí <strong>sí</strong> puede influir.</li>
+</ul>
+<ul>
+<li><strong>Caso histórico:</strong> la <strong>amigdalectomía en niños</strong> variaba entre hospitales y dentro del mismo hospital por falta de criterios unificados. A la variabilidad propia del médico se le llamó <strong>«estilo de práctica profesional»</strong>.</li>
+<li><strong>Epidemiología clínica:</strong> análisis epidemiológico aplicado a decisiones sobre pacientes individuales.</li>
+<li><strong>Consecuencias:</strong> riesgo de <strong>iatrogenia</strong>, falta de efectividad y gasto inadecuado. Aplicar mal la evidencia es variabilidad <strong>injustificada</strong>.</li>
+<li><strong>Retos para la dirección:</strong> personal que no conoce la MBE, resistencia al cambio y falta de motivación. Ayudan los <strong>facilitadores</strong>, las áreas de difusión y capacitación, y los instrumentos que miden el apego a las GPC.</li>
+<li><strong>Medicina de las 4P:</strong> preventiva, predictiva, personalizada y participativa; atiende <strong>enfermos, no enfermedades</strong>. Busca prevenir complicaciones, aumentar la capacidad intrínseca y controlar el dolor.</li>
+<li><strong>Dónde buscar evidencia:</strong> <strong>Cochrane</strong> (revisiones sistemáticas), NHS Centre for Research &amp; Development (revisiones y costo-efectividad), <strong>MEDLINE/PubMed</strong>, National Clearinghouse y New Zealand Guidelines (fuentes secundarias para GPC). Después viene la lectura crítica.</li>
+<li><strong>MECIC</strong> (Modelo de Evaluación del Expediente Clínico Integrado y de Calidad): mide el apego a las GPC con <strong>11 algoritmos</strong>. Tiene 3 apartados (archivo clínico, expediente estomatológico y expediente integrado y de calidad), se captura <strong>cada cuatrimestre</strong> y depende del Subcomité de Calidad del Expediente Clínico del COCASEP.</li>
+<li><strong>Retos futuros:</strong> estudiar la variabilidad que afecta a la seguridad, reforzar las agencias de evaluación de tecnologías (y la <strong>desinversión</strong> en lo inefectivo) e incorporar la experiencia del paciente a las GPC.</li>
+</ul>
+<h3 id="tema-6">Tema 6. Evaluación del desempeño de centros, unidades y servicios</h3>
+<p><strong>Idea central:</strong> «<strong>no se puede gestionar lo que no se puede medir</strong>». Evaluar el desempeño exige indicadores definidos, métodos para medirlos, estrategias de recogida de datos y procedimientos para sintetizar y notificar resultados.</p>
+<ul>
+<li><strong>Recomendación del tema:</strong> mejor un conjunto <strong>pequeño de indicadores centinela</strong> que medirlo todo, combinando indicadores de resultado, de producción y de proceso.</li>
+<li><strong>México:</strong> la evalúa la <strong>Dirección General de Evaluación del Desempeño</strong> de la Secretaría de Salud.</li>
+</ul>
+<p><strong>Los 8 proyectos de indicadores de México</strong></p>
+<ul>
+<li><strong>INDICAS:</strong> calidad de gestión, técnica e interpersonal; <strong>111 variables → 28 indicadores → 8 índices → 3 rubros</strong> (trato digno, organización de los servicios y atención médica efectiva).</li>
+<li><strong>PROSESA:</strong> rendición de cuentas y acceso a la información pública; <strong>274 líneas de acción, 39 estrategias, 6 objetivos</strong>.</li>
+<li><strong>Indicadores de resultados:</strong> esperanza de vida, nacimientos, defunciones y atención a menores de 5 años.</li>
+<li><strong>Caminando a la Excelencia:</strong> vigilancia epidemiológica; <strong>7 indicadores, 23 programas de acción</strong>.</li>
+<li><strong>Objetivos del Milenio:</strong> metas internacionales.</li>
+<li><strong>PREVENIMSS:</strong> prevención en el IMSS, con el <strong>SAIS</strong> (registro nominal en primer nivel).</li>
+<li><strong>OCDE:</strong> estado de salud, acceso, factores de riesgo, recursos y calidad; 4–7 indicadores por dimensión.</li>
+<li><strong>Observatorio del Desempeño Hospitalario:</strong> el sistema hospitalario.</li>
+</ul>
+<p>Los 6 objetivos del PROSESA: protección, promoción y prevención; riesgos a la salud; Sistema Nacional de Salud Universal; uso efectivo de recursos; reducir brechas entre grupos y regiones; y acceso efectivo con calidad.</p>
+<p><strong>Modelos internacionales</strong></p>
+<ul>
+<li><strong>OMS / OPS:</strong> 5 ejes: acceso, calidad, equidad, eficiencia y sustentabilidad. Acceso = barreras <strong>físicas</strong> y <strong>económicas</strong>. Equidad = subsidios y <strong>coeficiente de Gini</strong>. Calidad = indicadores de estructura, proceso y resultado (mortalidad infantil y materna, fecundidad, VIH/SIDA).</li>
+<li><strong>OCDE:</strong> adopta el de la OMS con cambios: añade resultados (eficiencia <strong>micro</strong>económica), acceso como «capacidad de respuesta» y gasto como meta (eficiencia <strong>macro</strong>económica); <strong>sin ponderaciones</strong>; solo asistencia médica.</li>
+<li><strong>NHS (Reino Unido):</strong> <strong>PAF</strong>, basado en el cuadro de mando integral, con <strong>51 indicadores y 6 dimensiones</strong>: mejora de la salud y menos desigualdad, acceso justo, cuidado apropiado y efectivo, eficiencia, experiencia del paciente y cuidador, y resultados de salud.</li>
+<li><strong>Australia (NHPC):</strong> creado a finales de los 90; mide, promueve el <strong>benchmarking</strong> e informa. <strong>3 metas</strong>: llevar la evaluación a medicina general y salud pública, conectar con otros profesionales y mejorar la información. Acredita hospitales con <strong>18 indicadores</strong>.</li>
+<li><strong>Canadá (CIHI):</strong> se basa en el informe <strong>Lalonde (1974)</strong>, en <strong>Evans y Stoddart (1994)</strong> y en la salud poblacional. <strong>4 dimensiones y 16 categorías</strong>: estado de salud, determinantes no médicos, funcionamiento del sistema, y comunidad y sistema. La <strong>equidad</strong> es transversal.</li>
+</ul>
+<p><strong>España</strong></p>
+<ul>
+<li><strong>Problema:</strong> no hay un marco común; sobran datos de recursos y actividad y faltan datos de resultados.</li>
+<li><strong>Ministerio de Hacienda (2015):</strong> modelo de evaluación del desempeño de empleados para mejorar el rendimiento, recompensar y liderar el cambio.</li>
+<li><strong>Plan de Calidad del SNS (2006), estrategia 12:</strong> un sistema de información fiable, oportuno y accesible. De ahí salen los <strong>Indicadores clave del SNS (INCLASNS)</strong>, con <strong>16 dimensiones</strong>, y un informe anual al Consejo Interterritorial.</li>
+<li><strong>REBECA:</strong> repertorio básico de estadísticas de las comunidades autónomas, en <strong>8 grupos</strong> (población, estado de salud, determinantes, sistema sanitario, gasto, medicamentos, derechos de los consumidores y síntesis).</li>
+<li><strong>Cataluña, Central de Resultados:</strong> mide, evalúa y difunde. Su <strong>indicador sintético de adecuación</strong> junta <strong>10 indicadores en 4 áreas</strong>: estancias de más de 20 días, cesáreas, hospitalizaciones evitables y urgencias.</li>
+<li><strong>Madrid, Observatorio de Resultados:</strong> 3 áreas: estado de salud, atención primaria y hospitales.</li>
+</ul>
+<h3 id="tema-7">Tema 7. Investigación traslacional</h3>
+<p><strong>Idea central:</strong> «la investigación básica tiene respuestas pero no conoce las preguntas; la clínica tiene preguntas pero no las respuestas». La traslacional une ambos mundos.</p>
+<ul>
+<li><strong>Definición:</strong> aplica el conocimiento científico que ya demostró ser eficiente en intervenciones de salud, lo hace útil a la población y maximiza el retorno de lo invertido (Máñez Ortiz, 2013). Combina un enfoque <strong>clínico y epidemiológico</strong>.</li>
+<li><strong>Instituciones:</strong> los <strong>Institutos de Investigación Sanitaria (IIS)</strong> la fomentan; su acreditación se regula en el <strong>RD 339/2004</strong>.</li>
+</ul>
+<ul>
+<li><strong>Las 5 fases:</strong> <strong>T0</strong> investigación básica → <strong>T1</strong> posibles aplicaciones → <strong>T2</strong> aplicación en la comunidad, en contextos reales → <strong>T3</strong> identificar el máximo beneficio → <strong>T4</strong> mantener el beneficio de forma sostenida.</li>
+</ul>
+<ul>
+<li><strong>Metodología en 4 pasos:</strong> identificar a los profesionales que usarán el conocimiento (uno con experiencia y autoridad); sumar a profesionales del mismo nivel; explorar la factibilidad con pilotos; buscar cambios de conducta, sostenibilidad y transferencia a la atención.</li>
+<li><strong>3 objetivos:</strong> responder a los problemas que plantea la clínica, <strong>acortar los tiempos</strong> de aplicación y <strong>centrar la investigación en los pacientes</strong>.</li>
+<li><strong>Integración:</strong> la I+D orientada al paciente y la orientada a la enfermedad convergen en la I+D centrada en la práctica clínica, que se incorpora al sistema sanitario. Se busca el <strong>retorno de la inversión de los fondos públicos</strong> de I+D.</li>
+<li><strong>3 cambios necesarios:</strong> de actitud y procedimiento (administraciones, directivos y clínicos); reorientar las prioridades y los fondos; y revisar cómo se evalúa la calidad de la investigación (no solo con el factor de impacto) y de las tecnologías.</li>
+</ul>
+<h3 id="tema-8">Tema 8. Gestión clínica en un área integrada</h3>
+<p><strong>Idea central:</strong> el sistema se organiza en <strong>áreas sanitarias</strong>; integrar atención primaria y especializada da cuidados <strong>menos fragmentados, más coordinados y de mayor calidad</strong>. Complementa el apartado 1.6 del tema 1.</p>
+<ul>
+<li><strong>Barreras al cambio</strong> (Gatica y Rosales, 2012): falta de coordinación administrativa entre niveles, pobres incentivos al personal y estructuras burocráticas rígidas.</li>
+<li><strong>GC en este tema:</strong> más que administrar, es una <strong>reingeniería</strong>. Mejora los procesos administrativos y asistenciales para usar con eficiencia los recursos tecnológicos, humanos, organizacionales e intelectuales.</li>
+<li><strong>Proceso</strong> (Tovar, 2014): actividades relacionadas, con entradas y salidas, que generan <strong>valor agregado</strong>.</li>
+<li><strong>3 medios:</strong> gestión adecuada de procesos, decisiones basadas en la evidencia y trabajo en equipo. El choque entre clínicos y gestores se maneja con comunicación.</li>
+<li><strong>Situación actual:</strong> usuarios más informados y exigentes; las TIC permiten diagnóstico a distancia, monitoreo de pacientes críticos y cuidados domiciliarios.</li>
+<li><strong>La GC es el enlace</strong> entre clínicos, pacientes y directivos.</li>
+</ul>
+<h3 id="tema-9">Tema 9. Gestión de hospitales de día</h3>
+<p><strong>Idea central:</strong> el hospital de día (HD) atiende durante <strong>unas horas</strong>, sin ingreso. Su <strong>cartera de servicios</strong> lo define y condiciona su gestión, instalaciones, personal y ubicación.</p>
+<ul>
+<li><strong>Definición (RD 1277/2003):</strong> unidad donde, bajo supervisión o indicación de un <strong>médico especialista</strong>, se trata a enfermos que requieren durante unas horas atención continuada médica o de enfermería, pero <strong>no el internamiento</strong>.</li>
+<li><strong>Historia:</strong> hasta los años 70 solo había régimen ambulatorio o internado (instituciones «abiertas» o «cerradas»). Entre 2000 y 2007 en España bajaron las camas y las plazas de HD <strong>se duplicaron hasta 23,3 por 100 000 habitantes</strong>.</li>
+<li><strong>Marco legal:</strong> la <strong>Ley 14/1986, General de Sanidad</strong>, crea el SNS. La <strong>Ley 16/2003, de Cohesión y Calidad</strong>, lo vertebra; su <strong>art. 13</strong> incluye el HD médico y quirúrgico en la atención especializada y pide atender en consultas externas y HD siempre que se pueda. Es decir, se <strong>prima la no hospitalización</strong>.</li>
+</ul>
+<ul>
+<li><strong>Otras unidades del RD 1277/2003:</strong> <strong>cirugía mayor ambulatoria</strong> (especialista; anestesia general o locorregional; cuidados postoperatorios cortos; sin ingreso), <strong>cirugía menor ambulatoria</strong> (anestesia <strong>local</strong>; baja complejidad; sin cuidados postoperatorios) y <strong>diálisis</strong> (responsable: especialista en <strong>Nefrología</strong>).</li>
+</ul>
+<p><strong>Tipos de hospital de día</strong></p>
+<ul>
+<li><strong>Médico-quirúrgico:</strong> polivalente, propio de <strong>hospitales pequeños</strong>; transfusiones, paracentesis, tratamientos parenterales; turno de mañana; parte de su actividad no es programada.</li>
+<li><strong>Quirúrgico:</strong> CMA y procedimientos cruentos; conectado al bloque quirúrgico; mañana y tarde; <strong>abre antes que el resto del hospital</strong>; el <strong>anestesista</strong> da el alta.</li>
+<li><strong>Médico:</strong> infecciosos, reumatología, neurología, dermatología; coordinación con Farmacia por los <strong>biológicos</strong>.</li>
+<li><strong>Oncológico u onco-hematológico:</strong> quimioterapia y <strong>citostáticos</strong>; más intimidad y espacio para acompañantes; sin rotación de pacientes en la jornada.</li>
+<li><strong>Integrados en un servicio:</strong> psiquiátrico, infecciosos-VIH, digestivo, diálisis, pediátrico (el <strong>más polivalente</strong>) y geriátrico; mismo jefe y supervisora.</li>
+<li><strong>Unidades de día:</strong> <strong>no</strong> son HD por su tamaño; son el germen de los HD médicos.</li>
+</ul>
+<ul>
+<li><strong>Organización:</strong> el Plan de Calidad del SNS rediseña procesos con <strong>2 pilares</strong>: seguridad del paciente y <strong>estándares y recomendaciones</strong> (no son normativos).</li>
+<li><strong>5 requisitos de una Unidad de Hospitalización de Día:</strong> estructura física diferenciada, cartera de servicios, protocolos y normas, personal dedicado y una persona al frente.</li>
+<li><strong>Estructura física:</strong> recepción y admisión, zona de espera (no imprescindible), área de tratamiento (sala diáfana o, lo ideal, cubículos), control de enfermería, consulta (no imprescindible si hay cubículos), despacho, aseos, vestuarios y oficios de apoyo.</li>
+<li><strong>Cartera típica:</strong> cuidados tras procedimientos, técnicas cruentas (biopsias, punciones) y administración de tratamientos (quimioterapia, biológicos).</li>
+<li><strong>6 tipos de protocolos:</strong> clínicos, de gestión de pacientes, de infección nosocomial (programa <strong>Bacteriemia Zero</strong>), de seguridad clínica, de servicios generales y de mantenimiento. Cada protocolo indica quién lo elaboró, revisó y aprobó.</li>
+<li><strong>Personal:</strong> especialistas, enfermería, auxiliar y celador, con una <strong>supervisora de enfermería</strong> al frente.</li>
+</ul>
+<h3 id="tema-10">Tema 10. Gestión de unidades de salud mental</h3>
+<p><strong>Idea central:</strong> la UGC de salud mental da <strong>atención integral</strong> con un <strong>modelo comunitario</strong>, busca la máxima autonomía del paciente y gira alrededor del <strong>plan individualizado de rehabilitación (PIR)</strong>.</p>
+<ul>
+<li><strong>Salud mental (OMS):</strong> estado de bienestar en el que la persona realiza sus capacidades, afronta el estrés normal de la vida, trabaja de forma productiva y contribuye a su comunidad.</li>
+<li><strong>GC aquí:</strong> uso de los recursos intelectuales, humanos, tecnológicos y organizativos para el mejor cuidado. Implica descentralizar y <strong>transferir riesgos</strong> a las unidades (pueden ganar o perder según sus resultados).</li>
+<li><strong>Planificación estratégica:</strong> misión (razón de ser, no la cartera de servicios), visión (ser unidades <strong>excelentes e innovadoras</strong>), valores, código ético y factores críticos de éxito.</li>
+<li><strong>5 grupos de valores:</strong> atención centrada en el paciente, compromiso, innovación, profesionalidad y trabajo en equipo.</li>
+<li><strong>3 ámbitos asistenciales:</strong> atención hospitalaria; centros de salud mental (adultos e infanto-juvenil); y estructuras intermedias (rehabilitación comunitaria, HD de psiquiatría y centros de adicciones).</li>
+</ul>
+<p><strong>Unidades hospitalarias y su estancia media</strong></p>
+<ul>
+<li><strong>Agudos (intervención breve):</strong> crisis con <strong>riesgo para sí o para terceros</strong>; restaurar el daño y los vínculos. <strong>Máximo 15 días.</strong></li>
+<li><strong>Subagudos:</strong> remisión de síntomas y <strong>prevención de recaídas</strong>; permite reevaluar el diagnóstico. <strong>Máximo 3 a 4 meses.</strong></li>
+<li><strong>Rehabilitación intensiva:</strong> trastorno mental grave refractario; unidades <strong>estructuralmente abiertas y funcionalmente semiabiertas</strong>. <strong>Unos 6 meses, nunca más de 9.</strong></li>
+<li><strong>Rehabilitación funcional:</strong> que el paciente use sus capacidades en el mejor contexto social posible. Sin plazo fijo.</li>
+</ul>
+<ul>
+<li><strong>Rehabilitación funcional, 3 énfasis:</strong> ayudar a superar el ambiente (no sucumbir a él), orientarse a la salud más que a los síntomas y creer en la recuperación.</li>
+<li><strong>Intervenciones con evidencia:</strong> entrenamiento en habilidades, apoyo comunitario, rehabilitación cognitiva, cognición social, rehabilitación laboral, servicios de pares, psicoterapias e intervenciones para alcohol, drogas y obesidad.</li>
+<li><strong>Objetivo último de la GC:</strong> <strong>efectividad</strong> (mejores resultados en la práctica diaria), <strong>eficacia</strong> (lo que la evidencia demostró) y <strong>eficiencia</strong> (menores costes para el paciente y la sociedad).</li>
+</ul>
+<p><strong>Indicadores para evaluar la UGC de salud mental</strong></p>
+<ul>
+<li><strong>Población:</strong> pacientes nuevos, reinicios (antes de un año), % en programa de trastorno mental grave o común.</li>
+<li><strong>Actividad:</strong> primeras y sucesivas consultas, crisis, consultas no presenciales, altas.</li>
+<li><strong>Accesibilidad:</strong> demora en primera consulta; % atendidos en menos de 15 días, menos de 30 y más de 30.</li>
+<li><strong>Seguridad:</strong> agresiones, fugas, eventos adversos, contenciones, caídas, escitalopram en mayores de 65, valproico en mujeres en edad fértil.</li>
+<li><strong>Eficacia:</strong> índice sucesivas/primeras, % no presenciales, inasistencias, cancelaciones.</li>
+<li><strong>Cuidados:</strong> altas derivadas a primaria y abandonos (separados por diagnóstico).</li>
+<li><strong>Satisfacción:</strong> pacientes y familias satisfechos, recomendarían la UGC, clima laboral, reclamaciones.</li>
+<li><strong>Resultados en salud:</strong> calidad de vida, adherencia, <strong>conciencia de enfermedad</strong> y actitud ante tóxicos.</li>
+</ul>
+<ul>
+<li><strong>4 principios éticos:</strong> <strong>beneficencia</strong>, <strong>no maleficencia</strong>, <strong>autonomía</strong> y <strong>justicia o equidad</strong> («lo mejor posible para todos los enfermos», frente a «lo mejor para mi paciente»).</li>
+<li><strong>Pregunta ética clave:</strong> ¿la relación beneficio/riesgo es razonable? Todo acto sanitario tiene riesgo físico, psicológico, moral y económico.</li>
+<li><strong>El estigma tiene 3 piezas:</strong> <strong>estereotipias</strong> (creencias erróneas, como la incurabilidad), <strong>prejuicios</strong> (actitudes: miedo, desprecio, paternalismo) y <strong>comportamientos discriminatorios</strong> (exclusión). El <strong>autoestigma</strong> es interiorizar esas creencias.</li>
+<li><strong>Contra el estigma:</strong> psicoeducación, autoestima, conocer los propios derechos y <em>empowerment</em>, con la familia desde el inicio. Referentes: Consejo de la UE (junio 2003), <strong>Declaración de Helsinki de la OMS (enero 2005)</strong>, Libro Verde (2005) y Estrategia en Salud Mental del SNS (2007). La primera medida antiestigma corresponde a la <strong>Administración</strong>, con servicios de calidad.</li>
+<li><strong>Investigación e innovación:</strong> objetivo <strong>traslacional y docente</strong>. Propuesta de innovar con empresas privadas, patentar y repartir beneficios <strong>al 50 %</strong>.</li>
+<li><strong>Satisfacción:</strong> primero una <strong>encuesta de expectativas</strong>, luego llevarlas al plan de gestión y después medir el impacto en salud. La encuesta de clima laboral evalúa 10 aspectos y separa <strong>reconocimiento</strong> de <strong>retribución</strong>.</li>
+<li><strong>Incentivos:</strong> económicos, días libres, congresos y estancias. <strong>Regla de los tres tercios</strong> del dinero ahorrado: 1/3 a la nómina de los trabajadores, 1/3 a la UGC y 1/3 al hospital o centro.</li>
+</ul>
+<h3 id="tema-11">Tema 11. Cómo diseñar, implantar y evaluar un plan de calidad</h3>
+<p><strong>Idea central:</strong> el plan de calidad es el <strong>conjunto de actuaciones en calidad</strong> de un servicio o unidad. Funciona solo con la implicación de la dirección, del staff y de los profesionales, y el éxito depende más de cómo se aplica que del modelo elegido.</p>
+<ul>
+<li><strong>Referentes:</strong> autores como Juran, Deming y Crosby; modelos ISO, <strong>EFQM</strong> y <strong>Joint Commission</strong>; y la acreditación de la comunidad autónoma.</li>
+<li><strong>Qué contiene:</strong> qué somos y adónde queremos llegar, objetivos, responsabilidades, estrategias, indicadores, calendario y cómo se revisará.</li>
+</ul>
+<p><strong>Las 15 recomendaciones</strong> (el orden es didáctico, no hay que terminar una para empezar otra):</p>
+<ol>
+<li>Asegurar que la dirección se implica totalmente (implicarse no es dar permiso: es participar y <strong>asignar presupuesto</strong>).</li>
+<li>Definir qué es la calidad para nosotros.</li>
+<li>Identificar clientes internos y externos y lo que nos demandan.</li>
+<li>Aprovisionarse de <strong>liderazgo, paciencia y tesón</strong>.</li>
+<li>Lograr la colaboración de los líderes formales e informales (<em>win-win</em>).</li>
+<li>Analizar el entorno y conocer otras experiencias.</li>
+<li>Posicionarse.</li>
+<li>Analizar las barreras y tener un plan B.</li>
+<li>Describir el marco general de actuación (acotar límites).</li>
+<li>Diseñar el sistema de calidad.</li>
+<li>Establecer la calidad de diseño.</li>
+<li>Fomentar la cultura de calidad.</li>
+<li>Formalizar la documentación.</li>
+<li>Asegurar la información: cuadros de mando.</li>
+<li>Revisar objetivos, despliegue y resultados.</li>
+</ol>
+<ul>
+<li><strong>Oferta frente a demanda:</strong> el círculo rojo son las necesidades y expectativas del cliente; el cuadrado azul, nuestra oferta. Si la oferta se queda corta hay que rediseñar; si se pasa, puede despertar expectativas (bueno) o gastar de más (malo).</li>
+<li><strong>Tres preguntas al cliente:</strong> qué es calidad para él, qué necesita y no tiene, y qué espera que le demos.</li>
+<li><strong>Método de 8 pasos:</strong> averiguar qué necesita el cliente → fijar un estándar → definir recursos → definir cómo prestar el servicio → prestarlo → evaluarlo → mejorar lo débil → <strong>volver a empezar</strong> (el paso que más se olvida).</li>
+<li><strong>Hacerlo dentro o encargarlo fuera:</strong> lo externo impone calendario y método; a cambio, el personal se implica menos y cuesta más.</li>
+<li><strong>Alianzas con proveedores (calidad concertada):</strong> identificar a los proveedores clave, elegir alianzas y diseñar estrategias para prevenir fallos.</li>
+<li><strong>Barreras:</strong> resistencia al cambio, miedo a perder el control, sensación de más trabajo y miedo a «salir mal en la foto». Se diagnostican con el <strong>modelo de desajustes (gaps) de Parasuraman, Zeithaml y Berry</strong>. La calidad no es la «carta a los Reyes Magos». Conviene <strong>empezar por lo fácil</strong> y avanzar de forma gradual.</li>
+<li><strong>Sistema de calidad:</strong> estructura organizativa, procedimientos, procesos y recursos para gestionar la calidad. Entradas: opinión de los públicos, sugerencias y reclamaciones, encuestas, auditorías e indicadores. Salidas: cuadros de mando, informes trimestrales, memoria anual, no conformidades, planes de mejora e incentivos.</li>
+<li><strong>Calidad de diseño:</strong> las características que definen la calidad de cada servicio. Ejemplos: responder una reclamación en menos de 48 horas; atender la fibrilación auricular en las primeras 48 horas.</li>
+<li><strong>Cultura de calidad:</strong> que se «hable» de calidad en todas partes, con un lenguaje cercano. El éxito depende del <strong>número de personas que se suman</strong>.</li>
+<li><strong>Documento:</strong> plan <strong>escrito y aprobado por la dirección</strong>, con objetivos, acciones, indicadores y estándares.</li>
+<li><strong>Cuadro de mando:</strong> como el tablero del coche, reúne los indicadores más relevantes para decidir.</li>
+<li><strong>Revisión del plan:</strong> anual, a mitad de su vigencia o tras una estrategia innovadora. Lo más acertado es comparar indicadores con estándares.</li>
+<li><strong>Lema:</strong> la calidad se logra «<strong>haciendo bien lo correcto</strong>».</li>
+</ul>
+<h3 id="tema-12">Tema 12. Responsabilidad social corporativa (RSC)</h3>
+<p><strong>Idea central:</strong> la RSC son compromisos <strong>voluntarios</strong> con la sociedad, que van <strong>más allá de la ley</strong>, en tres ámbitos: <strong>económico, social y medioambiental</strong>.</p>
+<ul>
+<li><strong>Definición de la UE (2002, COM 2002 347):</strong> integrar las preocupaciones sociales y medioambientales en la actividad diaria y en la relación con los <strong>grupos de interés</strong>, de forma voluntaria y más allá de las exigencias legales.</li>
+<li><strong>Triple cuenta de resultados (o triple memoria):</strong> el informe económico, social y medioambiental que muestra si la organización cumple sus compromisos.</li>
+<li><strong>Elementos clave en sanidad:</strong> la <strong>transparencia</strong> y un <strong>código ético</strong> en la gestión de recursos.</li>
+</ul>
+<ul>
+<li><strong>Lo que NO es RSC:</strong> la <strong>filantropía estratégica</strong> (donación según el donante; tampoco es patrocinio), la <strong>gestión medioambiental</strong> sola (es un pilar de tres), el <strong>marketing con causa</strong> (asociar la marca a una causa, como el cinturón de seguridad) y la <strong>imagen corporativa</strong> (visión <strong>efímera</strong>).</li>
+<li><strong>Reputación corporativa:</strong> percepción <strong>estable y verificable</strong> que se genera dentro; una buena imagen mantenida genera reputación, y la RSC es uno de sus mayores componentes.</li>
+</ul>
+<ul>
+<li><strong>Historia:</strong> <strong>1999</strong> Pacto Mundial de la ONU y <strong>GRI</strong> (guía de informes de triple cuenta) → <strong>2001</strong> Consejo Europeo de <strong>Gotemburgo</strong> → después, <strong>Libro Verde</strong> de la Comisión Europea (Objetivos de Lisboa) → <strong>marzo 2003</strong> primer informe de RSC y Políticas Públicas en España → <strong>2004</strong> el modelo <strong>EFQM</strong> incluye la RSC como eje transversal.</li>
+</ul>
+<ul>
+<li><strong>Dos enfoques actuales:</strong> países donde la RSC es voluntaria y países donde es obligatoria por regulación.</li>
+<li><strong>En la práctica:</strong> no son acciones puntuales sino un cambio de estrategia. Un buen primer paso es una <strong>memoria de RSC con indicadores</strong>. Ventajas: mejor reputación, atraer y retener talento, mejores resultados económicos, menos vulnerabilidad ante crisis y personal más satisfecho.</li>
+<li><strong>Sector sanitario:</strong> casi sin tradición (excepciones: Hospital Virgen de las Nieves y Hospital General de Vic). Se definieron <strong>11 áreas</strong>: recursos humanos y formación, informática y protección de datos, calidad, gestión económica, ambiental, pacientes, ética, proveedores, dirección, comunidad, y docencia e investigación.</li>
+<li><strong>Escala RSC-HospitalES</strong> (Mira et al., 2013): mide cómo perciben los profesionales la orientación de RSC de su hospital.</li>
+</ul>
+<h3 id="tema-13">Tema 13. Evaluación de resultados de una unidad de gestión clínica</h3>
+<p><strong>Idea central:</strong> evaluar responde a la pregunta <strong>«¿qué se ha conseguido y a qué coste?»</strong>. Es la fase <strong>Check</strong> del ciclo PDCA de Deming y sirve para fijar los objetivos del año siguiente.</p>
+<ul>
+<li><strong>Evaluación:</strong> proceso de determinar y aplicar criterios e indicadores para emitir un juicio sobre la actividad, tanto al planificar como al ejecutar.</li>
+<li><strong>Criterio:</strong> norma de lo deseable, lo que queremos conseguir (a veces se le llama meta). <strong>Indicador:</strong> medida cuantitativa que guía y valora la calidad.</li>
+<li><strong>4 dimensiones a evaluar:</strong> científico-técnica, satisfacción de los pacientes, organización y gestión de personas, y gestión económica y presupuestaria.</li>
+<li><strong>7 atributos de la GC:</strong> práctica basada en guías y protocolos; modelo de calidad (Joint Commission, EFQM); implicación de los profesionales; continuidad asistencial; organización del trabajo; satisfacción de los usuarios; y eficiencia.</li>
+<li><strong>Reglas claras desde el inicio:</strong> objetivos e indicadores se pactan y explican antes; la evaluación cambia conforme madura la UGC.</li>
+<li><strong>Objetivos SMART:</strong> <strong>e</strong>specíficos (<em>specific</em>), <strong>m</strong>edibles, <strong>a</strong>lcanzables, <strong>r</strong>ealistas y en un <strong>t</strong>iempo determinado.</li>
+</ul>
+<p><strong>Tipos de indicadores</strong></p>
+<ul>
+<li><strong>Cuantitativo:</strong> un valor numérico (ablaciones cardíacas con éxito &gt; 95 %; colonoscopia en ingresados &lt; 48 h).</li>
+<li><strong>Dicotómico:</strong> sí o no (existe un protocolo de úlceras por presión).</li>
+<li><strong>Cualitativo:</strong> solo si no cabe uno cuantitativo, por su subjetividad.</li>
+<li><strong>Sintético:</strong> resume una dimensión en <strong>una sola cifra</strong> (indicador sintético de farmacia).</li>
+<li><strong>Llave:</strong> de <strong>obligado cumplimiento</strong>; si falla, toda la dimensión deja de evaluarse.</li>
+</ul>
+<ul>
+<li><strong>Ponderación:</strong> cada indicador pesa según su relevancia y su dificultad. Los objetivos difíciles <strong>no deben pesar mucho</strong>, para no desmotivar.</li>
+<li><strong>Ejemplo real (Hospital XXX, 2015):</strong> presupuesto del capítulo I = 31; capítulo II = 27 (presupuesto 18 + farmacia 9); indicadores de procesos y resultados = 42 (asistenciales 12, seguridad y calidad 12, continuidad 10, información al paciente 4 y sistemas de información 4). Total: 100.</li>
+<li><strong>Principio de economía:</strong> recopilar <strong>solo la información estrictamente necesaria</strong>, con el menor coste.</li>
+<li><strong>Pasos:</strong> seleccionar indicadores; identificar fuentes (historia clínica, registros, encuestas); definir un plan de monitorización (responsables y periodicidad); y difundir <strong>resultados preliminares</strong> como señales de alarma.</li>
+<li><strong>Ejemplo de ficha:</strong> bacteriemias por catéter venoso central, objetivo <strong>≤ 3 por 1000 días de catéter</strong>, fuente ENVIN, la recoge Medicina Preventiva.</li>
+<li><strong>Auditorías de historias clínicas:</strong> hay que calcular el tamaño de muestra, y los resultados se presentan con <strong>intervalos de confianza</strong>.</li>
+</ul>
+<p><strong>Evaluación secuencial en 5 pasos</strong></p>
+<ol>
+<li>Al cerrar el año, la dirección o una comisión local hace la primera evaluación.</li>
+<li>La UGC analiza los resultados y presenta <strong>alegaciones</strong>.</li>
+<li>La dirección del centro valora las alegaciones y hace una propuesta de evaluación interna.</li>
+<li>Los servicios centrales (comisión central de seguimiento) la contrastan con sus datos.</li>
+<li>Se aprueba en una <strong>reunión a tres bandas</strong>: gerencia del servicio de salud, dirección del centro y responsables de la UGC.</li>
+</ol>
+<p>La puntuación puede traducirse en <strong>productividad variable</strong> (complemento salarial). La <strong>evaluación individual</strong> fija objetivos para cada profesional, alineados con la unidad; puede incluir una <strong>evaluación de 180°</strong> (superiores y compañeros), que exige madurez organizativa.</p>
+<h3 id="tema-14">Tema 14. El ciclo de mejora</h3>
+<p><strong>Idea central:</strong> la mejora continua es un <strong>principio transversal</strong> de la cultura sanitaria y se aplica con el ciclo <strong>PDCA</strong>: planificar, hacer, verificar y actuar.</p>
+<ul>
+<li><strong>Origen de la participación del personal:</strong> la <strong>Teoría Z de W. Ouchi</strong>.</li>
+<li><strong>Equipos de mejora:</strong> profesionales afectados por un <strong>mismo problema</strong>, voluntarios, durante un <strong>tiempo limitado</strong>.</li>
+<li><strong>Círculos de calidad:</strong> voluntarios que trabajan <strong>largos períodos</strong>, unas horas por semana, para mejorar sus procesos. Primer círculo: <strong>Japón, 1949</strong>; en España los introdujo <strong>Ford en 1980</strong>.</li>
+<li><strong>Comisión clínica:</strong> el tipo de equipo propio de sanidad, con reglamento específico.</li>
+<li><strong>Rasgos de un buen equipo:</strong> <strong>8 miembros como máximo</strong>, objetivos compartidos, un líder elegido por ellos, autonomía y formación en herramientas.</li>
+<li><strong>7 pasos del ciclo de mejora:</strong> identificar y priorizar el problema; analizarlo y recopilar información; buscar soluciones; elegir una; presentarla a la dirección; ejecutarla; y evaluarla.</li>
+<li><strong>Historia del PDCA:</strong> lo creó <strong>Walter A. Shewhart</strong> (estadístico) en los <strong>años 30</strong> y lo popularizó <strong>Edward Deming</strong> en los <strong>50</strong>; por eso se le llama «círculo de Deming». No tiene final; se detiene cuando las mejoras ya no son coste-efectivas (proceso estabilizado).</li>
+</ul>
+<ul>
+<li><strong>Plan (planificar):</strong> fijar objetivos y límites del proyecto, definir indicadores y recopilar datos.</li>
+<li><strong>Do (hacer):</strong> implantar el cambio, de preferencia con un <strong>piloto a pequeña escala</strong>; mejor cambios pequeños y frecuentes.</li>
+<li><strong>Check (verificar):</strong> comparar los indicadores con los objetivos.</li>
+<li><strong>Act (actuar):</strong> incorporar la mejora, comunicarla e identificar nuevos problemas; si no funcionó, probar otra acción.</li>
+</ul>
+<ul>
+<li><strong>Herramientas de la calidad:</strong> diagrama de causa-efecto, listas de verificación, diagramas de flujo, histogramas, <strong>diagrama de Pareto</strong> y gráficos de control (también lluvia de ideas y matriz de decisión).</li>
+<li><strong>Matriz de priorización:</strong> opciones contra criterios; se puntúa (p. ej., de 1 a 5), se suma y se empieza por la opción con <strong>mayor puntuación</strong>.</li>
+<li><strong>Mejora gradual o continua:</strong> perfecciona lo que existe. <strong>Mejora radical:</strong> rehace el proceso desde la raíz y abandona lo previo.</li>
+<li><strong>Kaizen:</strong> <em>kai</em> = cambio y <em>zen</em> = mejora continua gradual y ordenada; es la «<strong>mejora continua que involucra a todos</strong>». Requiere tiempo, concienciación y disciplina.</li>
+</ul>
+<h2 id="glosario">Glosario</h2>
+<p>Los 53 términos y siglas que más aparecen, en orden alfabético y con su tema entre paréntesis. Para repasar, lee el término y trata de definirlo antes de leer la definición.</p>
+<ul>
+<li><strong>Acuerdo o contrato de gestión:</strong> pacto <strong>anual</strong> de objetivos entre una unidad y su gerencia (1, 13).</li>
+<li><strong>Área sanitaria:</strong> estructura que gestiona centros, recursos y prestaciones de un territorio (8).</li>
+<li><strong>Autoestigma:</strong> interiorizar las creencias negativas sobre la propia enfermedad (10).</li>
+<li><strong>Aval ciudadano:</strong> participación de la comunidad en la calidad de los servicios, en México (4).</li>
+<li><strong>Benchmarking:</strong> compararse con otros para aprender y mejorar (2, 3, 6).</li>
+<li><strong>Calidad de diseño:</strong> características que definen la calidad de cada servicio (11).</li>
+<li><strong>Cartera de servicios:</strong> conjunto de prestaciones: técnicas, tecnologías y procedimientos (1, 9).</li>
+<li><strong>CENETEC:</strong> Centro Nacional de Excelencia Tecnológica en Salud; coordina las GPC en México (5).</li>
+<li><strong>Círculo de calidad:</strong> grupo voluntario y estable que mejora sus propios procesos (14).</li>
+<li><strong>COCASEP:</strong> Comité de Calidad y Seguridad del Paciente; órgano técnico consultivo (4).</li>
+<li><strong>Continuidad asistencial:</strong> atención sin cortes entre atención primaria y especializada (1, 8).</li>
+<li><strong>Criterio:</strong> condición que debe cumplir la práctica para ser de calidad (2, 13).</li>
+<li><strong>Cuadro de mando:</strong> conjunto de indicadores clave para tomar decisiones (11).</li>
+<li><strong>DAFO:</strong> debilidades y fortalezas (internas); amenazas y oportunidades (externas) (1).</li>
+<li><strong>DCA:</strong> Dirección de Continuidad Asistencial, Madrid 2015 (1).</li>
+<li><strong>Eficacia:</strong> resultado que la evidencia demostró posible (10).</li>
+<li><strong>Efectividad:</strong> resultado logrado en la práctica diaria (10).</li>
+<li><strong>Eficiencia:</strong> resultado con el menor coste para el paciente y la sociedad (10).</li>
+<li><strong>Equipo de mejora:</strong> afectados por un mismo problema; voluntarios; tiempo limitado (14).</li>
+<li><strong>Estándar:</strong> nivel aceptable que debe alcanzar un indicador (2).</li>
+<li><strong>Estigma:</strong> estereotipias + prejuicios + comportamientos discriminatorios (10).</li>
+<li><strong>Evaluación de 180°:</strong> evaluación del desempeño por superiores y compañeros (13).</li>
+<li><strong>Gestión clínica (GC):</strong> práctica clínica + gestión de recursos (1, 3).</li>
+<li><strong>GPC:</strong> guía de práctica clínica, con recomendaciones basadas en evidencia (5).</li>
+<li><strong>GRI:</strong> Global Reporting Initiative (1999), guía para informes de RSC (12).</li>
+<li><strong>Hospital de día (HD):</strong> atención de unas horas, sin internamiento (9).</li>
+<li><strong>IIS:</strong> Institutos de Investigación Sanitaria, acreditados según el RD 339/2004 (7).</li>
+<li><strong>INCLASNS:</strong> indicadores clave del SNS español, en 16 dimensiones (6).</li>
+<li><strong>INDICAS:</strong> indicadores de calidad de México: 111 → 28 → 8 → 3 (6).</li>
+<li><strong>Indicador:</strong> medida cuantitativa con la que se evalúa un criterio (2, 13).</li>
+<li><strong>Indicador centinela:</strong> uno de los pocos indicadores clave que cubren lo más relevante (2, 6).</li>
+<li><strong>Indicador llave:</strong> obligatorio; si no se cumple, toda la dimensión deja de evaluarse (13).</li>
+<li><strong>Indicador sintético:</strong> resume varios indicadores en una sola cifra (6, 13).</li>
+<li><strong>Kaizen:</strong> «mejora continua que involucra a todos» (14).</li>
+<li><strong><em>Lex artis</em>:</strong> práctica basada en la evidencia y centrada en el paciente (4).</li>
+<li><strong>Macro, meso y microgestión:</strong> Estado, centros y práctica clínica (3).</li>
+<li><strong>Mapa de procesos:</strong> representación gráfica de procesos estratégicos, clave y de soporte (2).</li>
+<li><strong>MBE:</strong> medicina basada en la evidencia: uso consciente, explícito y juicioso de la mejor evidencia (5).</li>
+<li><strong>MECIC:</strong> evaluación del expediente clínico; mide el apego a las GPC con 11 algoritmos (5).</li>
+<li><strong>Monitorización:</strong> seguimiento de indicadores; por sí sola no mejora nada (2).</li>
+<li><strong>PDCA:</strong> Plan, Do, Check, Act; ciclo de Shewhart popularizado por Deming (2, 13, 14).</li>
+<li><strong>PIR:</strong> plan individualizado de rehabilitación, en salud mental (10).</li>
+<li><strong>Plan de calidad:</strong> conjunto de actuaciones en calidad de un servicio o unidad (11).</li>
+<li><strong>Proceso:</strong> actividades encadenadas en secuencia que dan un resultado al paciente (2, 8).</li>
+<li><strong>Productividad variable:</strong> complemento salarial por cumplir objetivos (13).</li>
+<li><strong>Propietario del proceso:</strong> responsable que lo gestiona, supervisa y evalúa (2).</li>
+<li><strong>Reputación corporativa:</strong> percepción estable y verificable de los grupos de interés (12).</li>
+<li><strong>RSC:</strong> responsabilidad social corporativa; compromiso voluntario económico, social y ambiental (12).</li>
+<li><strong>Sistema de calidad:</strong> estructura, procedimientos, procesos y recursos para gestionar la calidad (11).</li>
+<li><strong>SMART:</strong> objetivos específicos, medibles, alcanzables, realistas y con plazo (13).</li>
+<li><strong>Triple cuenta de resultados:</strong> informe económico, social y medioambiental (12).</li>
+<li><strong>UGC:</strong> unidad de gestión clínica (3, 10, 13).</li>
+<li><strong>Variabilidad injustificada:</strong> diferencias de práctica sin base científica (3, 5).</li>
+</ul>
+
+<aside class="callout" id="preguntas">
+  <h2>Preguntas de práctica</h2>
+  <p>Las 43 preguntas de opción múltiple están en el quiz: te dice al momento si acertaste y por qué, y guarda las que falles para repasarlas.</p>
+  <p><a class="btn" href="quiz.html">Hacer el quiz →</a></p>
+</aside>
+
+<h2 id="repaso">Repaso de último minuto</h2>
+<p>Si solo tienes 15 minutos antes del examen, lee esta sección: reúne las cifras, los trucos y las confusiones que más se preguntan.</p>
+<p><strong>Cifras, leyes y fechas</strong></p>
+<ul>
+<li><strong>T1:</strong> Soria = nov. 2011, 1600 trabajadores, 120 M€, sello 500+ (2015) · Valencia = 24 departamentos, 4 pilares · Madrid = DCA (2015).</li>
+<li><strong>T2:</strong> ISO 9000:2005 define el proceso.</li>
+<li><strong>T4:</strong> 2001 informe europeo de buen gobierno · Ley 11/2017 (Madrid) · COCASEP en el DOF del 27/12/2012.</li>
+<li><strong>T5:</strong> 2007 Programa Nacional de GPC (CENETEC) · MECIC = 11 algoritmos, cada cuatrimestre.</li>
+<li><strong>T6:</strong> INDICAS 111 → 28 → 8 → 3 · PROSESA 274 · 39 · 6 · Caminando a la Excelencia 7 indicadores y 23 programas · PAF 51 indicadores y 6 dimensiones · NHPC 3 metas y 18 indicadores · Canadá 1974, 1994, 4 dimensiones y 16 categorías · Plan de Calidad SNS 2006 (estrategia 12) · INCLASNS 16 dimensiones · REBECA 8 grupos · Cataluña 10 indicadores en 4 áreas.</li>
+<li><strong>T7:</strong> RD 339/2004 · 5 fases (T0–T4).</li>
+<li><strong>T9:</strong> Ley 14/1986 (General de Sanidad) · Ley 16/2003, art. 13 (Cohesión y Calidad) · RD 1277/2003 (definición de HD) · 23,3 plazas por 100 000 hab.</li>
+<li><strong>T10:</strong> agudos 15 días · subagudos 3–4 meses · rehabilitación intensiva ~6 meses (máx. 9) · tres tercios · 50 % con empresas.</li>
+<li><strong>T11:</strong> 15 recomendaciones · método de 8 pasos.</li>
+<li><strong>T12:</strong> 1999 Pacto Mundial y GRI · 2001 Gotemburgo · 2002 definición UE · marzo 2003 primer informe en España · 2004 EFQM · 11 áreas en hospitales.</li>
+<li><strong>T13:</strong> ponderación 31 · 27 · 42 · bacteriemias por catéter ≤ 3 por 1000 días.</li>
+<li><strong>T14:</strong> Shewhart años 30, Deming años 50 · primer círculo Japón 1949, Ford en España 1980 · máx. 8 por equipo.</li>
+</ul>
+<p><strong>Trucos para memorizar listas</strong></p>
+<ul>
+<li><strong>P-O-D-E</strong>, las fases de la GC: Planificar, Organizar, Dirigir, Evaluar.</li>
+<li><strong>«CLOE FEST»</strong>, las 8 barreras de la GC: Cultura, Liderazgo, Organización, Estrategia, Formación, Estilos de práctica, Sistemas de información, Transparencia.</li>
+<li><strong>E-C-S</strong>, los tipos de procesos: Estratégicos, Clave, Soporte.</li>
+<li><strong>T0 → T4</strong>, la investigación traslacional: básica, aplicar, comunidad, máximo beneficio, mantener.</li>
+<li><strong>SMART</strong>: Específicos, Medibles, Alcanzables, Realistas, con Tiempo.</li>
+<li><strong>E-P-D</strong>, el estigma: Estereotipias (lo que se cree), Prejuicios (lo que se siente), Discriminación (lo que se hace).</li>
+<li><strong>B-N-A-J</strong>, la ética: Beneficencia, No maleficencia, Autonomía, Justicia.</li>
+<li><strong>4P</strong>: preventiva, predictiva, personalizada, participativa.</li>
+</ul>
+<p><strong>Confusiones típicas</strong></p>
+<ul>
+<li><strong>Equipo de mejora</strong> (un problema, tiempo limitado) ≠ <strong>círculo de calidad</strong> (largos períodos, horas semanales).</li>
+<li><strong>Indicador sintético</strong> (resume en una cifra) ≠ <strong>llave</strong> (obligatorio) ≠ <strong>centinela</strong> (pocos y clave).</li>
+<li><strong>Incertidumbre</strong> (no hay evidencia) ≠ <strong>ignorancia</strong> (la hay y no se usa).</li>
+<li><strong>Eficacia</strong> (lo que demostró la evidencia) ≠ <strong>efectividad</strong> (lo logrado en la práctica) ≠ <strong>eficiencia</strong> (al menor coste).</li>
+<li><strong>Criterio</strong> (lo deseable) ≠ <strong>indicador</strong> (cómo se mide) ≠ <strong>estándar</strong> (el nivel aceptable).</li>
+<li><strong>INCLASNS</strong>, 16 dimensiones (España) ≠ <strong>Canadá</strong>, 4 dimensiones y 16 categorías.</li>
+<li><strong>Imagen corporativa</strong> (efímera) ≠ <strong>reputación</strong> (estable y verificable).</li>
+<li><strong>Mejora gradual</strong> (perfecciona) ≠ <strong>mejora radical</strong> (rehace desde la raíz).</li>
+</ul>
+<p><strong>Plan de estudio en 4 sesiones</strong></p>
+<ol>
+<li><strong>Temas 1, 2, 3 y 8</strong> (gestión clínica y procesos) y sus preguntas: unas 2 h.</li>
+<li><strong>Temas 4, 5, 6 y 7</strong> (gobierno, variabilidad, desempeño e investigación) y sus preguntas: unas 2 h 30 min.</li>
+<li><strong>Temas 9 a 14</strong> (hospital de día, salud mental, calidad, RSC, evaluación y mejora) y sus preguntas: unas 2 h 30 min.</li>
+<li><strong>Glosario, las 43 preguntas seguidas</strong> y repaso de los temas donde fallaste: 1 h 30 min.</li>
+</ol>
+<p>La víspera, lee solo esta sección y la clave de respuestas. Toda la guía sale únicamente del PDF del curso (UNIR, Gestión en Salud, temas 1 a 14).</p>
+  <p class="foot">Resumen personal de estudio hecho a partir del material de la asignatura Gestión en Salud (UNIR). No incluye ni sustituye el material original del curso. <a href="guia-gestion-salud.pdf">PDF para imprimir</a> · <a href="quiz.html">Quiz</a></p>
+</main>
+</body>
+</html>
